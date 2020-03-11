@@ -1,6 +1,0 @@
-Hi I on DevOps Training
-
-
-Hi I am in trouble.
-
-Hi I am trying to push the local git file on remote git.
