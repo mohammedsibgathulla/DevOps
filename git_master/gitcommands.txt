@@ -23,3 +23,6 @@
 23. git pull origin master // to pull changes from origin to develop branch
 24. git reset HEAD filename //to revert commit of a file.
 25. git reset HEAD~
+26. rm -rf .git //the command remove all the files of the directory where it is executed
+27. rm -rf * //It will completely format your complete laptop
+28. 
