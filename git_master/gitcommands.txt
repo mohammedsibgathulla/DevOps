@@ -25,4 +25,4 @@
 25. git reset HEAD~
 26. rm -rf .git //the command remove all the files of the directory where it is executed
 27. rm -rf * //It will completely format your complete laptop
-28. 
+28. you can fork a github existing project by logging into your account and just pressing the fork icon of other existing github repository.
