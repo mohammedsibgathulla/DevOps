@@ -1,0 +1,18 @@
+1. git config --global user.name "mohammed, sibgathulla"
+2. git config --global user.email "mohammed.shak81@gmail.com"
+3. git config --list
+4. git help
+5. git help add
+6. git init
+7. git status
+8. git add .
+9. git add filename.extension
+10. git commit -m "message"
+11. git log
+12. git log --author="mohammed, sibgathulla"
+13. git config --global core.editor "subl -n -w"
+14. git diff
+15. git diff --staged
+16. git rm "filename.eextension"
+17. git remove add orgin "url of the repository copied from github"
+18.
