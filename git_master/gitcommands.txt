@@ -15,4 +15,4 @@
 15. git diff --staged
 16. git rm "filename.eextension"
 17. git remove add orgin "url of the repository copied from github"
-18.
+18. git pull origin master
