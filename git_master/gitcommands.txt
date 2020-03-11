@@ -16,3 +16,7 @@
 16. git rm "filename.eextension"
 17. git remove add orgin "url of the repository copied from github"
 18. git pull origin master
+19. git branch branch_name
+20. git checkout branch_name
+21. git branch -> Shows all branches
+22. 
