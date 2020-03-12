@@ -55,5 +55,12 @@
 55. git log --oneline
 56. git diff commitid1 commitid2
 57. git diff HEAD HEAD^
+58. git status
+59. git branch -a
+60. git branch branchname
+61. git checkout branchname
+62. git branch -m branchname newbranchname //to rename a branch
+63. git branch -d branchname //to delete a branch
+64. git log --oneline --decorate
 
 
