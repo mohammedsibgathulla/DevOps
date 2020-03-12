@@ -71,6 +71,7 @@
 71. git rebase --abort //in order to break the rebase 
 72. git rebase --continue //in order to continue rebasing after resolving the conflicts.
 73. git rebase --skip
+74. git fetch //it will fetch all the changes that are in ur remote repository but not on your local machine.
 
 
 
