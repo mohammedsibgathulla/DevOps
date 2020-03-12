@@ -36,3 +36,7 @@
 36. git rm -rf directoryname // it will delete all files and folders from that directory recursively
 37. git mv filename newfilename //command to rename a file.
 38. git mv filename directoryname // command to  move a file to another directory.
+39. git log --online --graph --decorate //command to get the commit history in online
+40. git log --since="2 days ago"
+41. git log -- filename // to see the changes on that file
+42. git show commit id // will show the details of that commit.
