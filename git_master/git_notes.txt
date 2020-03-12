@@ -68,6 +68,7 @@
 68. git merge branchname -am "message"
 69. git checkout -b branchname //this command will create a new branch and checkout into it
 70. git rebase branchname // merege will createa an extra "mergecommit" hence we use rebase if we don't want that.
+71. git rebase --abort
 
 
 
