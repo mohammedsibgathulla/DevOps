@@ -44,5 +44,6 @@
 44. git config --global alias.history "log --all --graph --decorate --oneline" //this is the alias for the above long command
 45. git history //now this will work as the alias for the 43 command
 46. subl ~/.gitconfig
+47. subl .gitignore
 
 
