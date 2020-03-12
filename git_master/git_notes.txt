@@ -72,6 +72,11 @@
 72. git rebase --continue //in order to continue rebasing after resolving the conflicts.
 73. git rebase --skip
 74. git fetch //it will fetch all the changes that are in ur remote repository but not on your local machine.
+75. git pull --rebase origin master
+76. git stash //when u don't want to commit but u want to work later on the file then use stash
+77. git stash list
+78. git stash apply
+79. git stash drop
 
 
 
