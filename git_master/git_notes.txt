@@ -77,6 +77,10 @@
 77. git stash list
 78. git stash apply
 79. git stash drop
+80. git ls-files //shows all the file in git including hidden files
+81. git stash -u //this command is used to stash the untracked file by git.
+82. git stash -a //all files
+83. git stash pop
 
 
 
