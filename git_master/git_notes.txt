@@ -62,5 +62,8 @@
 62. git branch -m branchname newbranchname //to rename a branch
 63. git branch -d branchname //to delete a branch
 64. git log --oneline --decorate
+65. git branch
+66. git merge target_branchname
+
 
 
