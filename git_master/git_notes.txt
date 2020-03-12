@@ -52,5 +52,8 @@
 52. git diff HEAD filename 
 53. git diff --staged HEAD
 54. git diff --staged HEAD filename
+55. git log --oneline
+56. git diff commitid1 commitid2
+57. git diff HEAD HEAD^
 
 
