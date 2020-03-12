@@ -81,6 +81,11 @@
 81. git stash -u //this command is used to stash the untracked file by git.
 82. git stash -a //all files
 83. git stash pop
+84. git stash save "Change in index.html"
+85. git stash show stash@{1}
+86. git stash apply stash@{1}
+87. git stash drop stash@{1}
+88. git stash clear //to clear / drop all the stashes
 
 
 
