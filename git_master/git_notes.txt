@@ -28,3 +28,4 @@
 28. you can fork a github existing project by logging into your account and just pressing the fork icon of other existing github repository.
 29. touch Sample.txt //to create a file from terminal
 30. echo "this is demo" > Sample.txt //To enter some text into the file from terminal
+31. subl filename.txt // to open a file with sublime
