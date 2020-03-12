@@ -40,3 +40,9 @@
 40. git log --since="2 days ago"
 41. git log -- filename // to see the changes on that file
 42. git show commit id // will show the details of that commit.
+43. git log --all --graph --decorate --oneline
+44. git config --global alias.history "log --all --graph --decorate --oneline" //this is the alias for the above long command
+45. git history //now this will work as the alias for the 43 command
+46. subl ~/.gitconfig
+
+
