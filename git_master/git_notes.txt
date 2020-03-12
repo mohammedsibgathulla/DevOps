@@ -34,3 +34,5 @@
 34. git reset HEAD filename // to restore the file in staging area
 35. git checkout -- filename //to restore the file to file system.
 36. git rm -rf directoryname // it will delete all files and folders from that directory recursively
+37. git mv filename newfilename //command to rename a file.
+38. git mv filename directoryname // command to  move a file to another directory.
