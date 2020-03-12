@@ -46,5 +46,7 @@
 46. subl ~/.gitconfig
 47. subl .gitignore
 48. cat filename //it will display the contents of the file
+49. git diff //to see changes of a file 
+50. git diff filename
 
 
