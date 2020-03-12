@@ -45,5 +45,6 @@
 45. git history //now this will work as the alias for the 43 command
 46. subl ~/.gitconfig
 47. subl .gitignore
+48. cat filename //it will display the contents of the file
 
 
