@@ -86,6 +86,7 @@
 86. git stash apply stash@{1}
 87. git stash drop stash@{1}
 88. git stash clear //to clear / drop all the stashes
+89. git stash branch branch_name
 
 
 
