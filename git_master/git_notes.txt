@@ -48,5 +48,7 @@
 48. cat filename //it will display the contents of the file
 49. git diff //to see changes of a file 
 50. git diff filename
+51. git diff HEAD //to compare working directory and repository
+52. git diff HEAD filename 
 
 
