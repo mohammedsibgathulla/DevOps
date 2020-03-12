@@ -50,5 +50,7 @@
 50. git diff filename
 51. git diff HEAD //to compare working directory and repository
 52. git diff HEAD filename 
+53. git diff --staged HEAD
+54. git diff --staged HEAD filename
 
 
