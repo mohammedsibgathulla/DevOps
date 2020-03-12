@@ -29,3 +29,8 @@
 29. touch Sample.txt //to create a file from terminal
 30. echo "this is demo" > Sample.txt //To enter some text into the file from terminal
 31. subl filename.txt // to open a file with sublime
+32. git checkout -- filename // to discard the changes in working directory
+33. git rm filename // to delete a file
+34. git reset HEAD filename // to restore the file in staging area
+35. git checkout -- filename //to restore the file to file system.
+36. git rm -rf directoryname // it will delete all files and folders from that directory recursively
