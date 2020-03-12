@@ -65,5 +65,7 @@
 65. git branch
 66. git merge target_branchname
 67. git merge branchname -m "message for merge"
+68. git merge branchname -am "message"
+
 
 
