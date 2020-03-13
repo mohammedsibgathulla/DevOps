@@ -95,6 +95,7 @@
 95. git show Release1.0 
 96. git tag --delete tagname
 97. git diff tag1 tag2
+98. git tag -a tagname commit_id "message"
 
 
 
