@@ -87,6 +87,10 @@
 87. git stash drop stash@{1}
 88. git stash clear //to clear / drop all the stashes
 89. git stash branch branch_name
+90. git tag Release1.0
+91. git log --oneline --decorate --graph --all
+92. git tag --list
+93. git tag --delete Release1.0
 
 
 
