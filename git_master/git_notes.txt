@@ -91,6 +91,9 @@
 91. git log --oneline --decorate --graph --all
 92. git tag --list
 93. git tag --delete Release1.0
+94. git tag -a Release1.0 "message"
+95. git show Release1.0 
+96. 
 
 
 
