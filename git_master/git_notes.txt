@@ -14,7 +14,7 @@
 14. git diff
 15. git diff --staged
 16. git rm "filename.eextension"
-17. git remove add orgin "url of the repository copied from github"
+17. git remote add orgin "url of the repository copied from github"
 18. git pull origin master
 19. git branch branch_name
 20. git checkout branch_name
@@ -97,6 +97,8 @@
 97. git diff tag1 tag2
 98. git tag -a tagname commit_id "message"
 99. git tag -a existing_tag_name -f commit_id "message" //updating an existing tag with a new commit id
+100. git checkout filename //it will replace the file with the file located on the git repository //revert the changes
+101. git commit --amend -m "Message" // to change the commit message of last commit
 
 
 
