@@ -93,7 +93,8 @@
 93. git tag --delete Release1.0
 94. git tag -a Release1.0 "message"
 95. git show Release1.0 
-96. 
+96. git tag --delete tagname
+97. git diff tag1 tag2
 
 
 
