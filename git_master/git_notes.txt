@@ -96,6 +96,7 @@
 96. git tag --delete tagname
 97. git diff tag1 tag2
 98. git tag -a tagname commit_id "message"
+99. git tag -a existing_tag_name -f commit_id "message" //updating an existing tag with a new commit id
 
 
 
