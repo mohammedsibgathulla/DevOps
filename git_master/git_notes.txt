@@ -102,6 +102,12 @@
 102. git reset --soft commit_id //Soft Commit Reset here u revert ur file to the commit_id that u mention. the file or changes will move to staging area.
 103. git reset commit_id // the file or changes will move to working area
 104. git reset --hard commit_id //No data left for recover.
+105. git reflog //after hard commit u lost the data and again u want to go back to ur commit then use reflog and copy the commit id 
+106. git checkout commit_id //and use the commit_id with checkout
+107. git branch backup
+108. git checkout develop
+109. git checkout backup then merge 
+110. git clean -df //to delete all the unnecceary file in working area.
 
 
 
