@@ -750,3 +750,10 @@ Explore Container Networks
 7. docker container stop container_id
 8. docker container start container_id
 
+Docker Network CLI : List & Inspect
+1. docker network ls //list all the networks on host machine
+2. docker network ls -f driver=bridge
+3. docker network --help
+4. docker network ls --format "{{.ID}}: {{.Driver}}"
+5. docker network inspect container_id
+
