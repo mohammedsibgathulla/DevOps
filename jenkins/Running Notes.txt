@@ -779,3 +779,7 @@ Docker Hub Repository
 1. docker pull <image_name>:<version>
 2. docker pull <image_name> //for latest
 
+Concept Of Docker Image Layers
+1. docker history <image_name> //to see the different layers of the image
+2. docker inspect mysql //to see the complete metadata of the image
+
