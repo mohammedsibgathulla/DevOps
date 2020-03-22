@@ -783,3 +783,8 @@ Concept Of Docker Image Layers
 1. docker history <image_name> //to see the different layers of the image
 2. docker inspect mysql //to see the complete metadata of the image
 
+Docker Images Tagging
+1. docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+Eg: docker tag ubuntu ubuntutest
+    docker tag mysql:5.7 mysqlmohammed:test //if you don't provide tags then we have to use the latest hence you must provide tags 
+
