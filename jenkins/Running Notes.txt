@@ -723,3 +723,16 @@ Start Container In Interactive Mode
 3. docker container run -it --name webproxy nginx bash
 4. ls -lrt
 5. exit //To exit from bash of container
+
+Run Commands In Running Containers
+1. docker container exec -it
+2. docker exec
+3. docker container ps / ls 
+4. docker container run -it  --name nginxweb nginx bash
+5. docker container exec -it 1b3703cc2343 touch /tmp/mohammed
+6. docker container exec -it 1b3703cc2343 bash
+7. docker container run -it ubuntu bash
+8. apt-get update // the curl command to open facebook won't works as the docke ubuntu has less feature hence we need to update
+9. apt-get install curl
+10. curl https://www.facebook.com
+
