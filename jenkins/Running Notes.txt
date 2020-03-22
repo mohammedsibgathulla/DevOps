@@ -1,0 +1,718 @@
+Jenkins Notes:
+
+
+
+1. ssh root@134.122.28.225  //command to connect to digital ocean server
+2. systemctl status jenkins //command to check whether jenkis is installed.
+3. systemctl stop jenkins //cmd to stop the jenkins server
+4. systemctl start jenkins
+5. systemctl restart jenkins
+6. ip addr show //command to show the ip of the jenkins
+
+
+Architectural Over View of Jenkins:
+
+Master:
+1. Schedule Build Job.
+2. Dispatch Builds to the slave for Actual Job Execution.
+3. Monitoring the slave and recording the build results.
+
+Slave:
+1. Execute Build Jobs dispatched by master.
+
+Jenkins Job: It refer’s to  runnable tasks thar are controlled and monitored by jenkins.
+Eg: Suppose for your deployment on aws, gcp etc u can setup a job for that.
+Eg: U want to build the project u can setup a job for that.
+Eg: U want to execute some kind of sequel on the server u can set up a job for that.
+
+Slave / Node: Slaves are the computer / vm’s that are setup to build projects for a Master.
+	- Jenkins run seperate program called ‘Slave Agents’ (Java Program) on slaves.
+	- When Slaves are registered to a master, a master starts distributing load to the slaves.
+	- Node is used to refer all machines that are part of Jenkins grid, slaves and master.
+
+Executor:  It is a seperate Stream of Builds to be run on a Node in parallel.
+	Executor is like a thread it executes a single job on a slave. There can be multiple executors on a single node / slave.
+- On a 4 GB RAM and 2 Processors cloud machine u can execute around 50 executors at a time. And it also depends on the task / type of work and the memory it takes.
+
+
+Plugins: A plugin is like plugins on any other system, is a piece of software that extends the core functionality of the core Jenkins Server.
+
+
+
+Continuous Integration with Jenkins
+
+Jenkins Integration with GIT & GITHUB
+- Install GitHub plugin on Jenkins Server using Mangae Plugins
+- git --version
+
+Install Maven on Jenkins Host Machine
+- sudo apt-get install maven
+- mvn –version
+
+Configure Jenkins to Work with Maven  & GIT
+Java Path
+- /usr/lib/jvm/java-8-openjdk-amd64
+Maven Path
+- /usr/share/maven/
+
+Git
+- git //just git no path
+
+Create Your First Maven Based Jenkins Job
+Maven Goals: test, install, compile, package, deploy, test-compile etc
+
+Source Code Polling In Jenkins
+Continuous Integration flow is not for manual work. 
+
+You have to select the Poll SCM
+
+In Jenkins schedule is basically in CRON Basis.
+
+Remote Build Trigger In Jenkins
+- Remote Build Trigger is helpful to execute the build externally.
+- If an action is triggered on Server B then a job is triggered on Server A then Remote Build Trigger is helpful.
+- U can call the Build Trigger by some script, API or UI Button Click Event.
+
+JENKINS_URL/job/First%20Sample%20Job/build?token=TOKEN_NAME  
+JENKINS_URL(http://134.122.28.225:8080/)
+
+Archive Artifact In Jenkins
+IN Jenkins Server
+1. Build Tab
+2. Add post-build action
+3. Post-Build Actions (Invoke Top Level Maven Targets)
+4. Files to archive – Enter **/*.jar Here ** means all the path available in your workspace
+5. **/* Will archive all artifacts.
+
+Install & Configure Tomcat in Staging Environment
+
+Tomcat Installation on Server
+
+1. sudo apt install unzip wget
+2. cd / tmp
+3. wget https://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.51/bin/apache-tomcat-8.5.51.zip
+4. unzip apache-tomcat-8.5.51.zip
+5. sudo mkdir -p /opt/tomcat
+6. sudo mv apache-tomcat-8.5.51 /opt/tomcat
+
+Change tomcat server port
+
+7. cd /opt/tomcat/
+8. cd apache-tomcat-8.5.51/
+9. cd conf
+10. vi server.xml
+11. / connector (it will search)
+12. change 8080 to 9090 then use esc key and enter wq the press enter button.
+13. Go to bin directory.
+14. ls -la
+15. sudo chmod +x * (Set the executable permission to the 	all scripts which are inside the current directory)
+16. ./startup.sh
+17. ./shutdown.sh
+18. cd conf
+18. vi tomcat-users.xml
+
+Edit Rolls so that jenkins can use the credentials
+
+19.roles = manager-script, admin-gui, password: tomcat, delete the end two lines
+20. shutdown and restart tomcat to apply the changes.
+
+Deploying Staging / QA Environment
+1. New Item
+2. Enter an Item Name ( Deploy_Application_Staging)
+3. Free Style Project -> Ok Button
+4. Description and select discart old builds and specify the numbers.
+5. Sourcode Management - > git
+6. Select Delete workspace before build starts in Build Environement.
+7. Add timestamps to the console output in Build Env.
+8. Add build step - > Select Invoke top-level maven targets
+9. Goals - >clean package
+10. Select Advanced and specify the path of pom.xml file.
+11. Add post-build actions and select Archieve the artifacts
+12. Enter **/*.war
+13. Build Now
+
+1. Go to Mangage Jenkins
+2. Go to Manage Plugins
+3. Select Available
+4. Search for copy artifact
+5. Install without restart
+6. Install Deploy to container plugin
+7. Create a new job Deploy_application
+8. At Add build step select Copy artifacts from another project
+9. Enter the project name of previous project as  Package_Application
+10. Check the Stable Build Option.
+11. Artifacts to copy -> **/*.war
+12.  In Post build-actions select Deploy war/ear to container
+13. war/ear -> **/*.war
+14. Contextpath -> /
+15. Add container -> select Tomcat 8.x
+16. Add Credentials -> Jenkins Credentials
+17. username and password -> tomcat & tomcat
+18. Now for credentials tomcat
+19. Server url -> http://134.122.28.225:9090
+20. Click on save.
+
+Make the jobs dependent on each other:
+1. Go to Package Application
+2. Selct Post Build-Actions
+3. Add post-build action and select Build other projects
+4. Type and select Deploy_Application_Staging_en
+5. Select Tirgger only if the build is stable
+6. In Poll SCM put cron syntax for every minute
+7. Save
+
+Once you save u get one more option inside your Package Application as Downstream Projects.
+
+Build Pipeline Plugin
+Install the Build Pipeline Plugin
+1. Click on + icon
+2. Enter View name
+3. Select Build Pipeline View.
+4. Enter some Build Pipeline View Title
+5. Select Initial Job – Package_Application
+6. Click on Ok
+
+Deploy to Production
+1. cp -r apache-tomcat-8.5.51 / apache-tomcat-8.5.51-prod/
+2. cd  apache-tomcat-8.5.51-prod/conf
+3. vi server.xml
+4. Edit the port to 9091 from 9090 of previous tomcat configuration file
+5. start the server in staging eve bin/startup.sh
+6. to see logs enter the command ->tail -f apache-tomcat-8.5.51-prod/logs/catalina.out and the command directory should opt/tomcat/
+
+1. Create a new item
+2. Enter an item name (Deploy_Application_Prod_Env)
+3. This will deploy Java Tomcat Application in Production.
+4. Discard Code builds 5 and 5.
+5. Delete Workspace before build starts and Add time stamps in Build Env.
+6. In Build Select Add build step and select Copy artifact from other project.
+7. Project Name -> Package Application
+8. Select Stable Build.
+9. Artificats to copy  -> **/*.war
+10. Click on Post-Build-Actions and select Deploy war/ear to a container
+11. Enter **/*.war
+12. Context path -> /
+13. Click Add Container and Choose the credentials tomcat.
+14. Enter the tomcat url -> http://134.122.28.225:8081/
+15. Click on save.
+
+
+1. Go to  Deploy_Application_Staging Configuration file
+2. Go to Post-build Actions
+3. Click Add post-build actions and select Build other projects (Manual Step)
+4. Enter the downstream project Deploy_Application_Prod_Env
+5. Click on save.
+
+Infrastructuer As Code: 
+Coding the jenkins job is called as Infrastructure as code instead of manually configuring them.
+
+Introduction to Jenkins Job DSL:
+DSL stands for Domain Specific Language.
+1. Go to Manage Plugins.
+2. Search for Job DSL
+3. Install Job DSL.
+
+
+Demo: Jenkins Job DSL with Maven Project
+1. Write the infrastructure code in MavenProjectDSL.groovy
+For jenkins naming convention refer: http://jenkinsci.github.io/job-dsl-plugin/#path/job/
+
+1. New Item
+2. Item Name -> Maven_Seed_Job
+3. Freestyle Project.
+4. Click Ok Button.
+5. Source Code Mgmt - > Selct Git.
+6. Copy Paste the Repository Url of the DSL file.
+7. In Build Options select Process Job DSL’s
+8. Copy paste the DSL Script path in DSL Scripts field. (MavenProjectDSL.groovy )
+9. Save.
+10. Go for build now. U will get an error to approve the script.
+11. Go to manage jenkins
+12. Go to In-Process Script Approal.
+13. Approve the script. And again build.
+
+Demo Code Pipeline
+Create a new view
+1. View name (CodePipeline)
+2. Select Pipeline View.
+3. Ok
+
+1. Create New Item
+2. Enter name (SampleCodePipeline)
+3. Select Pipeline
+4. Ok
+5. Description – This is the first and sample pipeline job.
+6. U can copy and paste the pipeline script in th Pipleline section.  Or select Pipline script from SCM.
+7. Select git and copy past the url of git project.
+8. Define the file name in the script path (Jenkinsfile)
+9. Save
+
+
+Automate Existing Maven Project Pipeline
+1. Inside Tomcat Application View
+2. Create a new Item
+3. Select Pipeline
+4. Description( This is Code Pipeline Job to Package the Maven Project)
+5. Select Discard Old Builds 5 5
+6. In Pipeline select Pipelinescript from SCM
+7. Select Git and copy paste the repository URL
+8. Paste the path as java-tomcat-sample/Jenkinsfile for script path
+9. Build Now.
+10. We got an error as “The goal you specified requires a project to execute but there is no POM in this directory (/var/lib/jenkins/workspace/Package Application Code Pipeline). Please verify you invoked Maven from the correct directory.
+“
+11. Hence we need to define the complete path of pom.xml in the Jenkins file.
+12. sh 'mvn -f java-tomcat-sample/pom.xml clean package'
+13. Build Now.
+
+Now configure the Deploy Application Staging and Prod Env jobs according to the Packaging Application Code Pipeline.
+1. Go to Deploy_Application_Staging and click on configure.
+2. Go to Build and change the existing project of Package Application to Package Application Code Pipeline
+3. Delete the post build actions configuration of Deploy_Application_Prod_Env.
+We will handle this in the Jenkinsfile.
+4. Save the job.
+
+Modify the same thing in the production environment.
+1. Go to Deploy_Application_Production and click on configure.
+2.  Go to Build and change the existing project of Package Application to Package Application Code Pipeline
+3. Save the job.
+4. Now modify the Jenkins file and add the starge to deploy the staging env.
+
+
+Distributed Builds Concept
+Here there will be on Jenkins Master and other slaves.
+
+Create and Configure Jenkins Slave
+1. Create the slave node.
+2. Login to digital ocean.
+3. Click on create button.
+4. Select Droplets
+5. Select Ubuntu
+6. Select the bare mininum machine.
+7. Select Newyork
+8. Select OTP
+9. Choose Name -> jenkinsslave1
+10. Create droplet
+
+IP Address: 198.211.100.174
+Username: root
+Password: Aistle7868@
+
+Jenkins Master will use a specific user called as Jenkins User to ssh on the slave machine.
+Hence we need to switch on the Jenkins user from the root user in master.
+1. sudo -iu jenkins
+We need to configure the ssh from master to slave with out the password. For this we will use the public private keys. We will generate a rsa certificate on my machine.
+1. ssh-keygen -t rsa
+2. Press enter twice.
+
+The paths will be
+/var/lib/jenkins/.ssh/id_rsa.
+/var/lib/jenkins/.ssh/id_rsa.pub.
+
+We need to create the .ssh directory on slave as well in order to configure master slave
+1. ssh root@198.211.100.174 mkdir -p .ssh (On Master) as jenkins user.
+2. Enter the password of slave machine
+we need to copy the public key on master to the slave node on ssh directory.
+3. cat /var/lib/jenkins/.ssh/id_rsa.pub | ssh root@198.211.100.174 ‘cat >> .ssh/authorized_keys’ (type it don’t copy paste it)
+4. Enter the password of slave
+5.  ssh root@198.211.100.174 (By using this command u can login to the slave from the master terminal) without password.
+6. exit (to exit form slave)
+
+
+On slave
+1. mkdir -p /bin
+2. mkdir bin
+Inside the bin directory we need to download the slave jar for that we need to download it from the master
+3. wget http://134.122.28.225:8080/jnlpJars/slave.jar
+
+We need to install the java
+4. sudo add-apt-repository ppa:webupd8team/java
+5. sudo apt-get update
+6. sudo apt install openjdk-8-jdk
+
+Now we will go to the Jenkins and attach the slave to it.
+1. Manage jenkins
+2. Manage Nodes
+3. New Node.
+4. Node Name (JenkinsSlave1)
+5. Select Permanent Agent
+6. Description : Unix Client
+7. No of executors: 2 executor on 1 core machine
+8. Remote Root Directory: /usr/jenkins	( U can define any directory)
+9. Labels : Linux
+10. Launch Method -> Launch agent via execution of command on the master
+11. Launch Command -> ssh root@198.211.100.174 java -jar /root/bin/slave.jar
+12. Save
+
+
+Concurrent Build Execution
+1. New View (Concurrent Jobs)
+2. Select List View
+3. Ok
+4. Click Ok
+1. New Job
+2. Concurrent Job 1
+3. Free sty;e
+4. Old build 5 5
+5. Build step (Enter shell script)
+6. Save
+
+Similarly create two more jobs with same script Con Job2, Con Job 3
+
+Execute all the jobs they will be executed accordtiong to the master schedule.
+
+
+If you want to execute some specific job on some specific slave then then in order to achieve this 
+1. We go to manage nodes.
+2. Select the slave
+3. Go to configuration
+4. Lable (Linux)
+5. Usage -> Only build jobs with label expression matching this node.
+
+To assign a job to particular slave 
+1. Go to configure the job.
+2. Check Restrict where this project can be run.
+3. Enter the label expression there.
+4. Save
+
+
+Available Docker Editions
+Docker Editions
+1. Communition Edition
+2. Enterprise Editions
+
+Community Edition
+1. Edge Release
+2. Stable Release
+
+Docker Editions at store.docker.com
+
+Install Docker on Linux Machine
+1. docker version ( to see the docker version)
+2. https://docs.docker.com/install/linux/docker-ce/ubuntu/
+3. sudo apt-get update
+4. sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+5. curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+6. lsb_release -a (Command to check ubuntu version)
+7. sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+8. sudo apt-get update
+9. sudo apt-get install docker-ce
+10. sudo usermod -a -G docker $USER (command to add root in docker sudo user)
+11. sudo docker run hello-world
+
+
+Docker Basics & Run Container
+1. Images Vs Containers
+2. Run Containers
+3. Check container logs &  process
+
+Why Containers required?
+What is Image?
+Image is a package of sourcecode , binaries, dependencies and execution environment.
+Image is application we want to run.
+
+With the help of docker we will create an executable image that contain the application binaries, sourcecode, dependencies of other applications and dependencies of the execution environment.
+
+The process which is executing that particular image is called the containers.
+Containers are required to execute the image.
+Containers is an running instance of image.
+Docker provides an execution environment to the container.
+You can have many containers running the same image
+
+Here we will use Open Source Nginx  Web-Server
+
+Docker Central Repository (hub.docker.com)
+
+Created Credentials for hub.docker.com
+
+It is the central repository of all the docker images.
+You can create a private / public account.
+
+Docker commands:
+1. docker run hello-world
+2. docker container run hello-world
+
+Search for nginx in hub.docker.com
+3. docker pull nginx
+4. docker info
+
+Start Nginx web-server in Docker
+docker container run --publish <host_port:container_port><image_name>
+docker container run --publish 80:80 nginx (it will choose the random name)
+docker run --name nginx -d -p 8080:80 nginx (it will put the name as nginx)
+
+Process Done on above commands:
+Downloaded images from Docker Hub.
+Started new container
+Exposed port 80 on Host Machine
+Routes traffic to the container port 80
+
+Start container in the backgroun or detach mode
+docker container run –publish <host_port:container_port> --detach	<image_name>
+docker container run --publish 80:80 --detach nginx
+the above command will generate the container id
+3e8f64f1ba328b63bb7b4cbdb8a1a2c750170612482e9d0b468574d30647f111
+docker container run --publish 8081:80 --detach nginx
+b4f5ecf71d37ea066f1463f548b9bf71c8286dc6919ddfcee08acd945cf887f9
+You will be able to access nginx on both the ports 8080 and 8081and both are same host machine
+This is the beauty of docker you can’t do this with the help of VM’s or other hosting applications.You can run the same application twice on same machine with the help of docker.
+
+List Running Containers
+docker container ls
+docker ps (old way)
+
+Docker File Basics | Introduction
+Docker can build 	images automatically  by reading the instructions from a Docker File.
+Docker File is a text document that contains all the commands a user could call on the command line to assemble an image.
+A Docker images consists of read only layers each of which represents a Dockerfile instruction.
+Command to build image from Dockerfile:
+docker build -f <path_of_docker_file>
+
+Docker File Instructions | Construction Commands
+See sample docker file on hub.docker.com -> hello world, tomcat
+
+1. FROM: The From instruction initializes a new build stage and sets the Base Image for subsequent instructions. It is first instruction.
+A valid docker file must start from the From instruction
+Base Image can be any valid image. (It can be linux, alpine etc..)	
+Format
+	FROM <image> [:<tag>]
+
+2. LABEL: It is added to image to organise images by project record licensing information.
+For each label, add a line begining with LABEL and with one or more key-value pairs.
+Eg: LABEL com.example.version=”0.0.1-beta”
+	LABEL vendor1=”ACME Incorporated”	
+
+3. RUN: It will execute any commands in a new layer on top of current image and commits the results.
+The resulting commit image will used for next step in the Dockerfile.
+Eg: FROM ubuntu:14.04
+	RUN apt-get update
+	RUN apt-get install -y curl
+
+4. CMD: Should be used to run the software contained by your image, along with any arguments.
+Format: CMD [“executable”, “param1”, “param2”)]
+There can be only on CMD instruction in the Dockerfile. If you list more than one CMD then only the last CMD will take effect.
+The main purpose of a CMD is to provide defaults for an executing container.
+
+5. EXPOSE: It indicated the ports on which a container listen for connections.
+Format: EXPOSE	<port>
+
+6. ENV: It sets the environment variable for you application.
+<Key>to the value <value>
+To make new software easier to run, you can use ENV to update the PATH environment variable for the software your container installs.
+
+7. ADD: It copies new files, directories from remote file URL’s from <src> and adds them to the filesystem of the image path<dest>
+Format: ADD hom* /mydir/ #adds files starting with hom
+
+8. VOLUME: It should be used to expose any database storage area, configuration storage or files/folders created by your docker container.
+
+9. WORKDIR: It setst the working directory for any RUN, CMD, ADD instructions that follow it in the Dockerfile.
+
+Create Docker File of Out Project
+1. Go to jenkins server in Tomcat Application and refer Package Application Code Pipeline
+2. Copy & rename the java-tomcat-sample to java-tomcat-docker
+3. Create a new Dockerfile in the project and write the commands ->see dockerfile.
+4. Modify Jenkins file
+5. Go to Jenkins Server and create a Docker Integration View (List View)
+6. Create a new Job (Build_Tomcat_Docker_Image)
+7. Select Pipleline Project
+8. Ok
+9. Description -> This project will create a Docker Image of java-sample-tomcat Project.
+10. Discard Old Builds 5 5
+11. Pipeline -> Pipeline Script from SCM
+12. SCM -> Git.
+13. Paste Repository URL
+14. Save
+15. Build Now
+
+Result -> Error in docker image
+16. Modify the docker file
+17. Check in the code and Build now.
+ 
+Build & Tag Project Docker Image
+1. Create a list view with name (Docker Integration)
+2. Create a new repository in the git and upload the maven-tomcat-sample-docker project.
+3. Modify the paths in Dockerfile.
+4. Go to Jenkins Server and create a new job (Build_Tomcat_Docker_Image)
+5. Select Pipleline and click on Ok
+6. Description > The project will create the Docker Image of Java-Sample-Tomcat-Project
+7. Discard Old Builds 55
+8. Pipeline -> Pipeline script from SCM
+9. Copy paste the new repository url.
+10. Save
+11. Build Now.
+12. Result -> Error
+13. Change the docker file and execute.
+14. docker images (in terminal to see the images)
+
+If you got permission issues then
+1. sudo usermod -a -G docker jenkins
+2. systemctl restart jenkins
+
+Execute Project in Docker
+1. docker images
+2. docker --version
+3. docker container run -p 9090:8080 tomcatsamplewebapp:3
+4. http://134.122.28.225:9095/java-tomcat-maven-example/
+The Colored is the war file name
+
+Add Parameters in Jenkins Job
+1. Create a new view (Parameterized Job)
+2. Select Listview
+3. Ok
+
+Parmeterized job requires dynamic parameters at run time.
+
+1. Create a new item.
+2. First_Parameterized_Job.
+3. Free style project.
+4.  Thisi s my first parameterized jenkins job.
+5. Disard Old builds 5 5
+6. Build -> Execute shell script
+	echo “This is my first parameterized job”
+	echo “My name is mohammed sibgathulla”
+7. save
+8. Build now.
+
+1. Configure
+2. General -> Check this project is parameterized.
+3. Add parameter -> String paramenter.
+4. Name -> First_Name
+5. Default Value -> Mohamemd Sibgathulla.
+6. Alter echo “My name is $First_Name”
+7. Save.
+8. Build with parameters
+
+Note: If you require more parameters then it may lead to high maintenance cost.
+
+Add Choice Parametrs in Jenkins Job
+1. Configure
+2. Add Parameter -> Select Choice Parameter.
+3. Enter name and choices
+4. Save.
+5. Build with paramerters.
+
+Add Logic with Boolean Parameter
+1. Configure
+2. Add Parameter -> Select Boolean Parameter.
+3. Enter name and Select Default value
+4. Replace the name in script and compare it.
+5. Save and build.
+
+Enable / Disable Login Jenkins
+To Disable login
+1. Go to manage jenkins
+2. Configure Global Security
+3. Uncheck Enable Security
+4. Save
+5. The server will be open for anyone.
+
+To Enable
+1. Go to manage jenkins
+2. Configure Global Security
+3. Check Enable Security
+4. Select Jenkin’s own user database
+5. Un Select Anyone can do anything
+6. Select Logged In user can do anything.
+7. Uncheck Allow anonymous read access.
+8. Save.
+
+Allow User to Sign-Up Jenkins
+1. Manage Jenkins
+2. Configure Global Security
+3. Select Allow User to Signup
+4. Save
+The test user has all the credentinal that a super use has it has flaws.
+
+Install Powerful Security Plugin
+1. Manage Jenkins
+2. Manage Plugins
+3. Search for Role based Authorized
+4. Install and restart. And check for installation.
+5. Manage Jenkins
+6. Configure Global Security
+7. Check Role-based Strategy
+8. Save. And scroll u will get new options Manage & Assign Roles.
+9. You can assign different roles by using this setting.
+
+How to create Users in Jenkins
+1. Go to manage jenkins
+2. Configure Global Security
+3. Manage Users.
+4. Create User
+5. Fill the details.
+6. After u logged in you will not have any permissions.
+
+Create & Assign Roles to Users
+1. Go to manage jenkins
+2. Manage & Assign Roles
+3. Manage Roles
+4. Role to Add -> read-only
+5. Select Read.
+6. Save
+7. Assign Roles
+8. User/Group to Add -> testuser
+9. Select read-only
+10. Save
+Now refresh the previous browser. Now the test user can see the read-only things.
+Similarly you can give many accesses to the user.
+
+Check Docker Install & Configuration
+- First we will learn about containers.
+- Check versions of Docker CLI
+- Learn Container Management Commands
+- Learn Docker Networking Basics.
+Commands
+1. docker version
+2. hostname -> Will return the hostname of the machine
+3. docker --version
+4. docker info
+5. docker –info
+6. docker (it will list out all the commands);
+Docker Management commands format
+docker <command> <sub-command> (optional)
+Eg: docker container run
+
+Start Your First Container
+Image vs Container
+run containers
+check container logs and process
+
+
+Stop-Remove the Containers 
+1. docker container stop <container_id>
+2. docker container ls (To see containers which are running)
+3. docker container ls -a (To see all container that are active and inactive)
+4. docker container run (start a new container always)
+5. docker container start (start a existing container)
+6. docker container run --publish 80:80 --detach --name<Name> <Image_Name> (Docker Container Names)
+7. docker container logs <container_name> / <container_id> (Seel Logs of a Specific Container)
+8. docker container top <conainer_id> (See Process Running Inside The Container)
+9. docker container rm <space seperated container ids> (Remove All Unused Containers)
+10. docker container rm -f container_id (Forcefully remove a running container)
+
+Docker Internal Processing
+Docker runs on port 80 on host machine and routes all the traffic to port 80 inside the container.
+
+Container vs Virtual Machines
+1. ps aux (To see the processes running on host machine)
+2. ps aux | grep nginx
+
+Assignment : Manage Multiple Containers
+Assignment: Answers Manage Multiple Containers
+1. docker container run -d -p 80:80 --name proxyserver nginx
+2. docker container run -d -p 8080:80 --name webserver httpd
+3. docker container run -d -p 3306:3306 --name mysqldb --env MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
+4. docker container logs mysqldb
+
+Docker CLI Monitoring
+1. docker container run -d --name proxyserver nginx
+2. docker container run -d --name mysqldb --env MYSQL_RANDOM_ROOT_PASSWORD=true mysql
+3. docker container inspect container name /id
+4. docker container stats container name / id
