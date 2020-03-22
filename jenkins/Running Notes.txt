@@ -716,3 +716,10 @@ Docker CLI Monitoring
 2. docker container run -d --name mysqldb --env MYSQL_RANDOM_ROOT_PASSWORD=true mysql
 3. docker container inspect container name /id
 4. docker container stats container name / id
+
+Start Container In Interactive Mode
+1. docker container run -it //Run Container Interactivity.
+2. docker container run --help
+3. docker container run -it --name webproxy nginx bash
+4. ls -lrt
+5. exit //To exit from bash of container
