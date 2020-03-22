@@ -795,3 +795,6 @@ Upload Docker Image To Cloud
 
 Dockerfile Basics
 1. docker build -f <path_of_docker_file>
+
+Dockerfile Instructions
+Refer the pdf file.
