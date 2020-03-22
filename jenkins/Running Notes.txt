@@ -770,3 +770,7 @@ Docker Network: DNS Concept
 2. docker container run -d --name my_nginx2 --network mynetwork  ngnix:alpine
 3. docker container exec -it my_nginx1 ping my_nginx2 // here containers are using name to communicate with each other the ip may assigned to other names hence we use dns
 
+What Is Docker Image
+1. docker images //to see all docker images.
+2. docker ps //to see any docker image running
+
