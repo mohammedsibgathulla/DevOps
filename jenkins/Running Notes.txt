@@ -739,3 +739,14 @@ Run Commands In Running Containers
 Docker Network Introduction
 1. See the pdf file.
 
+Explore Container Networks
+1. docker container run -p 8080:80 -d nginx
+2. ifconfig eth0 //to find the ip of local machine
+3. docker container port container_id
+4. docker container inspect container_id  // see the network settings and check ip address 
+5. docker contianer inspect --help
+6. docker container inspect -f '{{.NetworkSettings.IPAddress}}' container_id
+//the container will not use the local network it will have its own virtual private network and its called 'bridge'
+7. docker container stop container_id
+8. docker container start container_id
+
