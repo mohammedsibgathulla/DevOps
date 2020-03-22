@@ -793,3 +793,5 @@ Upload Docker Image To Cloud
 2. docker image push USER/Image-name //mohammed/imagename or the image will not be pushed so u should create tag with username for the image and then push it.
 3. docker logout
 
+Dockerfile Basics
+1. docker build -f <path_of_docker_file>
