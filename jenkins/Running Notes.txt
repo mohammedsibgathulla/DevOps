@@ -788,3 +788,8 @@ Docker Images Tagging
 Eg: docker tag ubuntu ubuntutest
     docker tag mysql:5.7 mysqlmohammed:test //if you don't provide tags then we have to use the latest hence you must provide tags 
 
+Upload Docker Image To Cloud
+1. docker login
+2. docker image push USER/Image-name //mohammed/imagename or the image will not be pushed so u should create tag with username for the image and then push it.
+3. docker logout
+
