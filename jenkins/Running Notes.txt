@@ -798,3 +798,8 @@ Dockerfile Basics
 
 Dockerfile Instructions
 Refer the pdf file.
+
+Create Custom Docker Image
+1. docker image build -t customnginx:0.01 /root/
+2. docker run -d -p 4444:90 customnginx:0.01 //the port number 90 should be same in the docker file
+3. scp filename root@ipaddress:/root //command to push a file from local to remote server
