@@ -757,3 +757,10 @@ Docker Network CLI : List & Inspect
 4. docker network ls --format "{{.ID}}: {{.Driver}}"
 5. docker network inspect container_id
 
+Docker Network: Create, Connect & Disconnect
+1. docker network create mynetwork // By default the driver is bridge.
+2. docker network inspect mynetwork
+3. docker container run -d --name my_nginx --network mynetwork nginx //connecting the container with mynetwork
+4. docker network connect mynetwork container_name // to connect existing container to a network
+5. docker network disconnect network_name container_name //If you disconnect all the network from a container then you will not be able to communicate with the container
+
