@@ -774,3 +774,8 @@ What Is Docker Image
 1. docker images //to see all docker images.
 2. docker ps //to see any docker image running
 
+Docker Hub Repository
+- In Explore link you will get all the official docker images.
+1. docker pull <image_name>:<version>
+2. docker pull <image_name> //for latest
+
