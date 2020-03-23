@@ -1,20 +1,13 @@
 # Each instruction in this file generates a new layer that gets pushed to your local image cache
 # The line below states we will base our new image on the Latest Official Ubuntu 
-FROM ubuntu:latest
+FROM nginx:latest
 
 # Identify the maintainer of an image
 LABEL version="0.0.1"
-LABEL maintainer="mohammed.shaik81@gmail.com"
+LABEL maitainer="anshulc55@gmail.com"
 
+# Updateing the work DIR
+WORKDIR /usr/share/nginx/html
 
-# Update the image to the latest packages
-RUN  apt-get update && apt-get upgrade -y
-
-# Install NGINX to test.
-RUN apt-get install nginx -y
-
-# Expose port 90
-EXPOSE 90
-
-# Last is the actual command to start up NGINX within our Container
-CMD [ "nginx", "-g", "daemon off;"]
+# Replace Index.html with Custom file
+COPY index.html index.html

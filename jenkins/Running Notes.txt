@@ -803,3 +803,8 @@ Create Custom Docker Image
 1. docker image build -t customnginx:0.01 /root/
 2. docker run -d -p 4444:90 customnginx:0.01 //the port number 90 should be same in the docker file
 3. scp filename root@ipaddress:/root //command to push a file from local to remote server
+
+Extended Official Docker Image
+In the docker file we have not used CMD as bcoz it is already present inside he official nginx image that we haved written as base images.
+1. docker image build -t nginx-customer:0.0.1 /root/ 
+2. docker container run -p 8080:80 nginx-custom:0.0.1
