@@ -825,4 +825,19 @@ Assignment Answer Build Docker Image
 Persistent Data Problem
 - We can solve the persistent data problem of containers with the help of Data Volumes & Bind Mounts.
 
-
+Persistent Data Volumnes
+1. docker pull mysql
+2. docker inspect mysql //check for volumes.
+3. docker run -d --name msyqldb -e MYSQL_ALLOW_EMPTY_PASSWORD=True mysql  
+4. docker ps
+5. docker inspect mysqldb //check for volumes & mounts and u can go to that particular location and see the data.
+6. docker volume ls
+7. docker run -d --name msyqldb2 -e MYSQL_ALLOW_EMPTY_PASSWORD-True mysql  
+8. docker volume ls
+9. docker container stop mysqldb 
+10. docker volume ls //the containers are destroyed but the data is present.
+11. docker volume inspect volume_id
+12. docker run -d --name msyqldb3 -e MYSQL_ALLOW_EMPTY_PASSWORD=True --mount source=mysql-db,destination=/var/lib/mysql mysql  
+13. docker volume ls // a new volume with custom name mysql-db will create for the above command as we have more than one volume we cannot identify with id so we use above custom names
+14. docker container stop mysqldb3
+15. docker run -d --name msyqldb4 -e MYSQL_ALLOW_EMPTY_PASSWORD=True --mount source=mysql-db,destination=/var/lib/mysql mysql  //started mysqldb4 with same volume of mysql-db
