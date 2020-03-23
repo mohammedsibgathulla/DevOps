@@ -841,3 +841,11 @@ Persistent Data Volumnes
 13. docker volume ls // a new volume with custom name mysql-db will create for the above command as we have more than one volume we cannot identify with id so we use above custom names
 14. docker container stop mysqldb3
 15. docker run -d --name msyqldb4 -e MYSQL_ALLOW_EMPTY_PASSWORD=True --mount source=mysql-db,destination=/var/lib/mysql mysql  //started mysqldb4 with same volume of mysql-db
+
+Persistent Data: Bind Mounts
+1. mkdir dockerbind //at root directory
+2. docker container run -d --name nginxbind --mount type=bind,source=$(pwd),target=/app nginx
+3. docker ps
+4. docker exec -it nginxbind bash 
+5. echo "hi this is custom file" > test.txt //in host terminal
+6. touch mohammed.txt
