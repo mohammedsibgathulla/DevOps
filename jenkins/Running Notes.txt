@@ -811,3 +811,13 @@ In the docker file we have not used CMD as bcoz it is already present inside he 
 
 Assignment Build Docker Image
 See the pdf file.
+
+Assignment Answer Build Docker Image
+1. docker image build -t python_prog:0.0.1 /root/
+2. docker container run python_prog:0.0.1
+3. docker imgate rm -f python_prog:0.0.1 python:latest
+4. docker image build -t mohammedhshaik81/python_prog:0.0.1 /root/
+5. docker login //Enter the credentinals
+6. docker push mohammedshaik81/python_prog:0.0.1
+7. docker image rm mohammedshaik81/python_prog:0.0.1
+8. docker container run mohammedshaik81/python_prog:0.0.1 // this image is not present in local it will download from your docker account

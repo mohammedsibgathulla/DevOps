@@ -1,13 +1,12 @@
 # Each instruction in this file generates a new layer that gets pushed to your local image cache
-# The line below states we will base our new image on the Latest Official Ubuntu 
-FROM nginx:latest
+FROM python:latest
 
 # Identify the maintainer of an image
 LABEL version="0.0.1"
 LABEL maitainer="anshulc55@gmail.com"
 
-# Updateing the work DIR
-WORKDIR /usr/share/nginx/html
+# Add Python Script
+ADD my_script.py /
 
-# Replace Index.html with Custom file
-COPY index.html index.html
+# Execute python script
+CMD [ "python", "./my_script.py" ]
