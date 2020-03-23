@@ -852,3 +852,30 @@ Persistent Data: Bind Mounts
 
 Assignment: Data Volumes
 - See pdf file.
+
+Assignment Answer: Data Volumes
+1. docker ps -a //to verify how many containers are running / exists on the machine
+2. docker container run --name=mysql-test mysql:8.0 //Will generate an error database is uninitialized and password option not specified.
+3. docker container run --name mysql-test -e "MYSQL_ROOT_PASSWORD=mypassword" mysql:8.0
+4. docker container run -d --name mysql-test -e "MYSQL_ROOT_PASSWORD=mypassword" --mount source=mysql-db,target=/var/lib/mysql mysql:8.0
+5. docker inspect mysql-test
+6. mysql -u root -p mypassword -h ipaddress -P 3306
+7. apt-get install mysql-client
+8. mysql -u root -pmypassword -h ipaddress -P 3306
+9. create database empdb;
+10. show databases;
+11. use empdb;
+12. CREATE TABLE Employee ( EmployeeID int, LastName varchar(255), FirstName varchar(255), Address varchar(255), City varchar(255));
+13. INSERT INTO Employee (EmployeeID, LastName, FirstName, Address,City)VALUES (14, 'B. Erichsen', 'Tom', 'Skagen 216', 'Norway');
+14. INSERT INTO Employee (EmployeeID, LastName, FirstName, Address,City)VALUES (17, 'Zbyszek', 'Wolski', 'Keskuskatu 45', 'Finland');
+15. commit;
+16. select * from employee;
+17. exit;
+18. docker container stop mysql-test;
+19. docker ps;
+20. docker container rm mysql-test;
+21. docker container run -d --name mysql-test-latest -e "MYSQL_ROOT_PASSWORD=mypassword" --mount source=mysql-db,target=/var/lib/mysql mysql:8.0.19
+22. mysql -u root -p mypassword -h ipaddress -P 3306
+23. show databases;
+24. use empdb;
+25. select * from employee;
