@@ -849,3 +849,6 @@ Persistent Data: Bind Mounts
 4. docker exec -it nginxbind bash 
 5. echo "hi this is custom file" > test.txt //in host terminal
 6. touch mohammed.txt
+
+Assignment: Data Volumes
+- See pdf file.
