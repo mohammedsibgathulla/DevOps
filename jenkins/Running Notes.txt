@@ -882,3 +882,15 @@ Assignment Answer: Data Volumes
 
 Assignment: Bind Mounts
 - See pdf file.
+
+Assignment Answer: Bind Mount
+1. docker ps -a 
+2. ifconfig
+3. docker container run -d --name nginx-test -p 80:80 nginx //ipaddress:80/index.html type in browser
+4. docker container stop nginx-test 
+5. docker exec -it nginx-test bash 
+6. cd /usr/share/nginx/html and type ls // you can see index.html file
+7. mkdir testnginx
+8. docker container run -d --name nginx-bind -p 80:80 --mount type=bind,source="$(pwd)",target=/usr/share/nginx/html nginx
+9. docker exec -it nginx-bind bash
+10. cd /usr/share/nginx/html //there will be no file present
