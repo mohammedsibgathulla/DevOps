@@ -821,3 +821,8 @@ Assignment Answer Build Docker Image
 6. docker push mohammedshaik81/python_prog:0.0.1
 7. docker image rm mohammedshaik81/python_prog:0.0.1
 8. docker container run mohammedshaik81/python_prog:0.0.1 // this image is not present in local it will download from your docker account
+
+Persistent Data Problem
+- We can solve the persistent data problem of containers with the help of Data Volumes & Bind Mounts.
+
+
