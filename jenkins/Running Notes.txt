@@ -879,3 +879,6 @@ Assignment Answer: Data Volumes
 23. show databases;
 24. use empdb;
 25. select * from employee;
+
+Assignment: Bind Mounts
+- See pdf file.
