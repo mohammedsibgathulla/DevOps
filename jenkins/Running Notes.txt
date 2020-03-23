@@ -808,3 +808,6 @@ Extended Official Docker Image
 In the docker file we have not used CMD as bcoz it is already present inside he official nginx image that we haved written as base images.
 1. docker image build -t nginx-customer:0.0.1 /root/ 
 2. docker container run -p 8080:80 nginx-custom:0.0.1
+
+Assignment Build Docker Image
+See the pdf file.
