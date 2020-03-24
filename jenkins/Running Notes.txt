@@ -903,3 +903,10 @@ Docker Compose Introduction
 
 Docker Compose YML File
 - See pdf file.
+
+Run MySql & Wordpress via Docker Compose
+1. touch docker-compose.yml
+2. chmod 777 docker-compose.yml //providing the executable permission.
+3. docker-compose up -d
+4. docker contianer logs container_id
+5. docker container logs -f container_id //this will show the logs in running mode
