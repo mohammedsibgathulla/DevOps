@@ -894,3 +894,10 @@ Assignment Answer: Bind Mount
 8. docker container run -d --name nginx-bind -p 80:80 --mount type=bind,source="$(pwd)",target=/usr/share/nginx/html nginx
 9. docker exec -it nginx-bind bash
 10. cd /usr/share/nginx/html //there will be no file present
+
+Docker Compose Introduction
+1. docker version
+2. sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+3. sudo chmod +x /usr/local/bin/docker-compose
+4. docker-compose --version
+
