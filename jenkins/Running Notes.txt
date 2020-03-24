@@ -921,3 +921,19 @@ Docker Swarm Introduction: Swarm Orchestration
 
 Docker Swarm Terminology
 - See pdf file.
+
+Create Service On Docker Swarm
+1. docker info
+2. docker swarm init
+3. ifconfig -a
+4. docker swarm init --advertise-addr ipaddress //it is used when we have more than one ip we use the eth0 ip by using the previous command
+5. docker swarm --help
+6. docker service --help
+7. docker service create alpine ping www.google.com //this will create a linux and image and run the service by pinging google.com on linux
+8. docker service inspect clever_kalam (servicename)
+9. docker service ls
+10. docker service ps clever_kalam //identifying running container for the service
+11. docker container inspect container_id 
+12. docker service ls //See replicas
+13. docker service update clever_kalam --replicas 4 //scale up the services
+14. docker container rm -f container_id  //if you stop a service the docker swarm will initiate the new service as we have defined 4 replicas. the docker orchestration system will completely handle configuration / orchestration of your docker service
