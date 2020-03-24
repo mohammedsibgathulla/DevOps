@@ -910,3 +910,8 @@ Run MySql & Wordpress via Docker Compose
 3. docker-compose up -d
 4. docker contianer logs container_id
 5. docker container logs -f container_id //this will show the logs in running mode
+
+Docker Compose: Build Application From Scratch
+1. docker-compose -f custom-application.yml up -d
+2. docker-compose -f custom-application.yml down
+3. docker volume create --name=data
