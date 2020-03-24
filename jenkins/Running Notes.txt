@@ -918,3 +918,6 @@ Docker Compose: Build Application From Scratch
 
 Docker Swarm Introduction: Swarm Orchestration
 - See pdf file.
+
+Docker Swarm Terminology
+- See pdf file.
