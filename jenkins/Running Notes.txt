@@ -975,3 +975,8 @@ Create Docker Swarm Cluster
 20. docker service ls
 21. docker service ps service_name //it will show which service is running on which machine
 22. docker container ls //on worker nodes and master. 
+
+References to Setup Docker on Swarm Docker Nodes
+1. Reference : https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
+2. Reference : https://docs.docker.com/machine/install-machine/#install-machine-directly
+3. Reference : https://docs.docker.com/compose/install/#install-compose
