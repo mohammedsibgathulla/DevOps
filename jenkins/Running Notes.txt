@@ -980,3 +980,12 @@ References to Setup Docker on Swarm Docker Nodes
 1. Reference : https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1
 2. Reference : https://docs.docker.com/machine/install-machine/#install-machine-directly
 3. Reference : https://docs.docker.com/compose/install/#install-compose
+
+Networks in Docker Swarm
+1. docker network ls
+2. docker network create -d overlay my_overlay //to create a custom user defined network.
+3. docker service create --name postgres --network my_overlay -e POSTGRES_PASSWORD=mypassword postgres
+4. docker service create --name mydrupal --network my_overlay -p 80:80 drupal
+5. docker service ls
+6. docker service ps postgress
+7. docker service ps drupal
