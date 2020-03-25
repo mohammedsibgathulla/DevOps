@@ -992,3 +992,16 @@ Networks in Docker Swarm
 
 Docker Swarm Traffic Management
 1. docker service inspect --format="{{json .Endpoint.Spec.Ports}}" mydrupal
+
+Assignment: Deploy Multi-Node Application In Docker Swarm
+- See pdf file.
+
+Assignment Answer: Deploy Multi-Node Application In Docker Swarm
+1. docker network create -d overlay front_end_ntw
+2. docker network create -d overlay back_end_ntw
+3. docker service create --name vote -p 5000:80  --network front_end_ntw --replicas 5 dockersamples/examplevotingapp_vote:before
+4. docker service create --name redis --network front_end_ntw --replicas 5 redis:3.2
+5. docker service create --name worker --network front_end_ntw --network back_end_ntw dockersamples/examplevotingapp_worker:latest
+6. docker service logs worker
+7. docker service create --name db --network back_end_ntw --mount type=volume,source=db-data,target=/var/lib/postgresql/data postgres:9.4
+8. docker service create --name result --network back_end_ntw -p 5001:80 dockersamples/examplevotingapp_result:before
