@@ -989,3 +989,6 @@ Networks in Docker Swarm
 5. docker service ls
 6. docker service ps postgress
 7. docker service ps drupal
+
+Docker Swarm Traffic Management
+1. docker service inspect --format="{{json .Endpoint.Spec.Ports}}" mydrupal
