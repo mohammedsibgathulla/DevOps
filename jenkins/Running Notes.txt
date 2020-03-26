@@ -1017,3 +1017,9 @@ Docker Swarm Stacks
 8. docker service ps nginx_start_web // to see the task running on different containers
 9. docker stack services nginx_start
 10. scp -r docker_project root@167.172.140.79:/root //command to push a directory to server using scp
+
+Docker Swarm Stack: Scale Application
+- Edit the yml file and change the replicas, cpu, memory etc.
+1. docker stack deploy -c docker-compose.yml nginx_start 
+2. docker service ps nginx_start_web
+3. docker service ps ngix_start_visualizer
