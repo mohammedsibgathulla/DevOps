@@ -1005,3 +1005,15 @@ Assignment Answer: Deploy Multi-Node Application In Docker Swarm
 6. docker service logs worker
 7. docker service create --name db --network back_end_ntw --mount type=volume,source=db-data,target=/var/lib/postgresql/data postgres:9.4
 8. docker service create --name result --network back_end_ntw -p 5001:80 dockersamples/examplevotingapp_result:before
+
+Docker Swarm Stacks
+1. docker build --tag=friendly_hello:v1.0.1 . //the . tells to take the resources(dockerfile) from the current directory.
+2. docker login
+3. docker tag friendly_hello:v1.0.1 mohammedshaik81/frindly_hello
+4. docker push mohammedshaik81/frindly_hello
+5. docker stack --help
+6. docker stack deploy -c docker-compose.yml nginx_start
+7. docker stack ls
+8. docker service ps nginx_start_web // to see the task running on different containers
+9. docker stack services nginx_start
+10. scp -r docker_project root@167.172.140.79:/root //command to push a directory to server using scp
