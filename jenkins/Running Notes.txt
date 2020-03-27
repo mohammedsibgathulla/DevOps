@@ -1084,4 +1084,16 @@ Health Check In Docker Swarm
 11. docker sevice ls
 12. docker service create --name postgresservice2 --health-cmd="pg_isready -U  || exit 1" -e POSTGRES_PASSWORD=mypassword postgres //here it will wait for 30 sec as the startup time 
 
+Container Placement In Docker Swarm
+1. docker run -it -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock dockersamples/visualizer
+2. docker container ls
+3. docker node ls
+4. docker service create --name postgresdb --constraint node.role==manager -e POSTGRES_PASSWORD=mypassword postgres
+5. docker service create --name mynginx --constraint node.role==worker --replicas=5 nginx
+6. docker node ls
+7. docker node update --label-add=region=east-1-d node_id
+8. docker node inspect node_id //in order to see the lable created.
+9. docker service create --name postgress --constraint node.labels.region==east-1-d -e POSTGRES_PASSWORD=mypassword postgres
+10. docker service update --constraint-rm=node.labels.region==east-1-d --constraint-add node.role==worker postgresdb
+
 
