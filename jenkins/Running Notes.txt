@@ -1036,3 +1036,6 @@ Swarm: Deploy Distributed Application
 3. docker stack ps votingstack
 4. docker container ls
 5. docker stack services votingstack
+
+Docker Swarm Secrets Introduction
+- See pdf file.
