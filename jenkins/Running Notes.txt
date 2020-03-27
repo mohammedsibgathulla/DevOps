@@ -1029,3 +1029,10 @@ Docker Swarm Persistent Data Issue In Distributed Application
 2. docker service ps nginx_start_redis
 3. docker service rm nginx_stop_redis
 4. docker stack deploy -c docker-compose.yml nginx_start //again to start the redis
+
+Swarm: Deploy Distributed Application
+1. docker stack deploy -c docker-stack.yml votingstack
+2. docker stack ls
+3. docker stack ps votingstack
+4. docker container ls
+5. docker stack services votingstack
