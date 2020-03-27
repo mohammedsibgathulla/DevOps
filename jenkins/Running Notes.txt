@@ -1012,7 +1012,7 @@ Docker Swarm Stacks
 3. docker tag friendly_hello:v1.0.1 mohammedshaik81/frindly_hello
 4. docker push mohammedshaik81/frindly_hello
 5. docker stack --help
-6. docker stack deploy -c docker-compose.yml nginx_start
+6. docker stack deploy -c docker-compose.yml nginx_start 
 7. docker stack ls
 8. docker service ps nginx_start_web // to see the task running on different containers
 9. docker stack services nginx_start
@@ -1023,3 +1023,9 @@ Docker Swarm Stack: Scale Application
 1. docker stack deploy -c docker-compose.yml nginx_start 
 2. docker service ps nginx_start_web
 3. docker service ps ngix_start_visualizer
+
+Docker Swarm Persistent Data Issue In Distributed Application
+1. docker stack deploy -c docker-compose.yml nginx_start //here we can write custom name instead of nginx_start
+2. docker service ps nginx_start_redis
+3. docker service rm nginx_stop_redis
+4. docker stack deploy -c docker-compose.yml nginx_start //again to start the redis
