@@ -1054,3 +1054,11 @@ Create Docker Service With Secrets
 11. docker service ps postgress //we can see the container name of the running service.
 11. docker exec -it postgress.1.1fqasdflasdfk bash
 12. cd /run/secrets/
+
+Deploy Stack With Swarm Secrets
+1. docker stack deploy -c docker-compose.yml postgredb
+2. docker stack deploy -c docker-compose.yml posgres_os_stack
+3. docker secret ls
+4. echo "mytestvalue" | docker secret create my-secret -
+5. docker secret ls
+
