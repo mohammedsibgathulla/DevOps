@@ -1096,4 +1096,6 @@ Container Placement In Docker Swarm
 9. docker service create --name postgress --constraint node.labels.region==east-1-d -e POSTGRES_PASSWORD=mypassword postgres
 10. docker service update --constraint-rm=node.labels.region==east-1-d --constraint-add node.role==worker postgresdb
 
-
+Service Constraints In YML File
+1. docker stack deploy -c docker-compose.yml mysql
+- See the yml file.
