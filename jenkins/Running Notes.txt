@@ -1071,4 +1071,17 @@ Zero Downtime Service Upgrade
 6. docker service ps web_server
 7. docker service update --publish-rm 8080 --publish-add 9090:80 web_server //to republish the port
 
+Health Check In Docker Swarm
+1. mkdir healthcheck
+2. docker container run --name postgres1 -d -e POSTGRES_PASSWORD=mypassword postgres
+3. docker container exec -it postgres1 bash
+4. pg_isready -U postgres //it will show whether postgres is accepting connections or not.
+5. docker container run -d --name postgres2 --health-cmd="pg_isready -U postgres || exit 1" -e POSTGRES_PASSWORD=mypassword postgres
+6. docker ps
+8. docker container run -d --name postgres3 --health-cmd="pg_isready -U root || exit 1" -e POSTGRES_PASSWORD=mypassword postgres  //instead of the postgres user we are trying to access the root user.
+9. docker ps
+10. docker service create --name postgresservice1 -e POSTGRES_PASSWORD=mypassword postgres
+11. docker sevice ls
+12. docker service create --name postgresservice2 --health-cmd="pg_isready -U  || exit 1" -e POSTGRES_PASSWORD=mypassword postgres //here it will wait for 30 sec as the startup time 
+
 
