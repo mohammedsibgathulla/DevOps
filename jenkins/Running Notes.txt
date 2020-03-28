@@ -1105,3 +1105,7 @@ Kubernetes Introduction & Uses
 
 Kubernetes Architecture
 - See the pdf file.
+
+Orchestration Giants: Kubernetes vs Docker System
+- See the pdf file.
+
