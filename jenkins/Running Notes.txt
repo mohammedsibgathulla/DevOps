@@ -1190,6 +1190,10 @@ the deployment to an external IP via the command:
 - Stop & Delete the local Minikube cluster:
 11. minikube stop
 12. minikube delete
+
+Kops Introduction
+- See pdf file.
+
  
 
 
