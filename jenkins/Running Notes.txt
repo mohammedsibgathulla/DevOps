@@ -1099,3 +1099,6 @@ Container Placement In Docker Swarm
 Service Constraints In YML File
 1. docker stack deploy -c docker-compose.yml mysql
 - See the yml file.
+
+Kubernetes Introduction & Uses
+- See the pdf file.
