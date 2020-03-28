@@ -1117,7 +1117,7 @@ Setup Kubernetes With Mini Kube
 2. df -k //to see the space on the droplet.
 3. df -h //to see space
 
-Install docker on linux machine 
+//Install docker on linux machine 
 1. sudo apt-get update
 2. sudo apt-get install \
     apt-transport-https \
@@ -1133,33 +1133,30 @@ Install docker on linux machine
 5. sudo apt-get update
 6. sudo apt-get install docker-ce
 
-Install KubeCtl
+//Install KubeCtl
 1. curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 2. chmod +x ./kubectl
-chmod +x ./kubectl
 3. sudo mv ./kubectl /usr/local/bin/kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
-4. kubectl version
-kubectl version --client
+4. kubectl version --client
 
-Install MiniKube
+
+//Install MiniKube
 1. curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
 2. sudo mkdir -p /usr/local/bin/
 3. sudo install minikube /usr/local/bin   
     
-Install Virtual Box //We are installing virtual box because minikube will execute the kubernetes inside the vm, it will create a seperate vm and install the kubernetes
+//Install Virtual Box //We are installing virtual box because minikube will execute the kubernetes inside the vm, it will create a seperate vm and install the kubernetes
 1. wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
 2. sudo apt-get update
 3. sudo apt-get install virtualbox 
 
-Execute MiniKube & Create Cluster
+//Execute MiniKube & Create Cluster
 1. export CHANGE_MINIKUBE_NONE_USER=true
 2. sudo -E minikube start --vm-driver=none //MiniKube will create a vm inside your box that vm will work as a worker and your node will work as a master.
 3. echo ‘export CHANGE_MINIKUBE_NONE_USER=true’ >> ~/.bashrc
 4. kubectl cluster-info
 
-Interact Cluster Using KubeCtl
+//Interact Cluster Using KubeCtl
 - Let’s create a Kubernetes Deployment using an existing image named
 echoserver, which is a simple HTTP server and expose it on port 8080
 using --port.
@@ -1193,6 +1190,32 @@ the deployment to an external IP via the command:
 
 Kops Introduction
 - See pdf file.
+
+Prepare AWS Environment For Kops
+1. curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+2. chmod +x ./kops
+3. sudo mv ./kops /usr/local/bin/
+
+//Install Kubectl Commands
+1. curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+2. chmod +x ./kubectl
+3. sudo mv ./kubectl /usr/local/bin/kubectl
+
+//Install Python Pip
+1. sudo apt-get install python-pip
+2. python --version
+
+//Install AWS Cli
+1. pip install awscli
+2. aws --help
+3. pip uninstall awscli
+4. aws configure
+5. Enter Access Key ID & Password from Amazon IAM User.
+6. ls -lrt ~/.aws/ //to check the configuration
+7. cat ~/.aws/credentials //this will show the credentials
+//create a s3 bucke on aws console and add ur domain on Route 53 in Networking & Content Deloiver on aws console.
+
+
 
  
 
