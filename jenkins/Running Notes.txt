@@ -1102,3 +1102,6 @@ Service Constraints In YML File
 
 Kubernetes Introduction & Uses
 - See the pdf file.
+
+Kubernetes Architecture
+- See the pdf file.
