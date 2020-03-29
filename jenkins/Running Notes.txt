@@ -1239,6 +1239,19 @@ Build & Push Docker Custom Image
 6. docker login --username=mohammedshaik81
 7. docker push mohammedshaik81/imagename
 
+Run First Custom Image On Local Kubernetes
+1. minikube start
+2. kubectl get node
+3. kubectl get --help
+4. kubectl create deployment magicalnginx --image=mohammedshaik81/magicalnginx //the image is coming from hub.docker.com and my account
+5. kubectl get deployments
+6. kubectl describe deployment deployment_name
+7. kubectl create service nodeport magicalnginx --tcp=80:80
+8. kubectl get svc
+9. minikube service magicalnginx --url
+10. curl url
+11. kubectl delete service service_name
+12. kubectl delete deployment deployment_name
 
 
 
