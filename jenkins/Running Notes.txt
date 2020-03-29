@@ -1228,7 +1228,20 @@ Kubernetes Setup On AWS Cloud
 7. kubectl expose deployment hello-minikube --type=NodePort --port=8080
 8. kubectl get services
 //here u will get the port number u have to go to aws console and select any node and in security groups add a custom rule in inbound with the port number and allow for everyone.
-9. kops delete cluster --name test.k8s.local --yes --state=s3://kops-storage-b34598
+
+
+Build & Push Docker Custom Image
+1. create a index.html file and dockerfile with content (From nginx:alpine /n . /usr/share/nginx/html) on root user.
+2. docker build -t nagicalnginx . //the dot specifies the current directory
+3. docker run -d --name alpinenginx -p 8081:80 nginx:alpine
+4. docker run -d --name customnginx -p 8085:80 magicalnginx
+5. docker tag container_id mohammedshaik81/magicalnginx
+6. docker login --username=mohammedshaik81
+7. docker push mohammedshaik81/imagename
+
+
+
+
 
 
 
