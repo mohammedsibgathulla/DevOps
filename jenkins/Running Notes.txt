@@ -1228,6 +1228,7 @@ Kubernetes Setup On AWS Cloud
 7. kubectl expose deployment hello-minikube --type=NodePort --port=8080
 8. kubectl get services
 //here u will get the port number u have to go to aws console and select any node and in security groups add a custom rule in inbound with the port number and allow for everyone.
+9. kops delete cluster --name test.k8s.local --yes --state=s3://kops-storage-b34598
 
 
 Build & Push Docker Custom Image
@@ -1245,13 +1246,28 @@ Run First Custom Image On Local Kubernetes
 3. kubectl get --help
 4. kubectl create deployment magicalnginx --image=mohammedshaik81/magicalnginx //the image is coming from hub.docker.com and my account
 5. kubectl get deployments
-6. kubectl describe deployment deployment_name
+6. kubectl describe deployment deployment_name  
 7. kubectl create service nodeport magicalnginx --tcp=80:80
 8. kubectl get svc
 9. minikube service magicalnginx --url
 10. curl url
 11. kubectl delete service service_name
 12. kubectl delete deployment deployment_name
+
+Run Custom Image On Kubernetes
+1. kops create cluster --yes --state=s3://kops-storage-b34598 --zones=ap-south-1a --node-count=2 --node-size=t2.micro --master-size=t2.micro --name=fabulouzfashion.com --ssh-public-key ~/.ssh/id_rsa.pub
+2. kops validate cluster --state=s3://kops-storage-b34598
+1. kops validate cluster --state=s3://kops-storage-b34598 -o json
+2. kops validate cluster --state=s3://kops-storage-b34598 -o yaml
+3. kubectl create deployment magicalnginx --image=mohammedshaik81/magicalnginx
+4. kubectl get deployments
+5. kubectl describe deployment deployment_name  
+6. kubectl create service loadbalancer magicalnginx --tcp=80:80
+7. kubectl get services
+11. kubectl delete service service_name
+12. kubectl delete deployment deployment_name
+13. kops delete cluster --name fabulouzfashion.com --yes --state=s3://kops-storage-b34598
+
 
 
 
