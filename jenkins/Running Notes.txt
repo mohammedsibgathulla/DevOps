@@ -1341,6 +1341,19 @@ Lab: Scaling Pods In Kubernetes With Replication Controller
 9. kubectl scale --replicas=2 rc/rc_name
 10. kubectl delete rc/rc_name
 
+Replica Set In Kubernetes
+1. chmod 777 replicaset.yml
+2. kubectl create -f replicaset.yml
+3. kubectl get rs
+4. kubectl get pods
+5. kubectl describe rs/replicaset_name
+6. chmod 777 pods.yml
+7. kubectl create -f pods.yml //By this cmd the pods will be created and delted as already we haved defiend 3 pods in replicaset.yml file and we are using the fronend in tier of pods.yml file
+8. kubectl get pods
+9. kubectl delete rs/frontend 
+10. kubectl create -f pods.yml //it will create 2 pods
+11. kubectl create -f replicaset.yml //it will create only one pods as alread 2 are running with same name as frontend this is called known template base pods aquisition of the replica
+
 
 
 
