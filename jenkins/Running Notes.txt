@@ -1357,6 +1357,32 @@ Replica Set In Kubernetes
 Deployment In Kubernetes
 1. See the pdf file.
 
+Lab: Deployment In Kubernetes
+1. chmod 777 webservicedeployment.yml
+2. kubectl create -f webservicedeployment.yml
+3. kubectl get deployments
+4. kubectl get rs
+5. kubectl get pods
+6. kubectl describe deployment/deployment_name
+7. kubectl get pods
+8. kubectl get pods --show-labels
+9. kubectl expose deployment deployment_name --type=NodePort
+10. kubectl get service
+11. minikube service service_name --url
+12. curl url
+13. kubectl set image deployment deployment_name nginx=mohammedshaik81/magicalnginx
+14. kubectl rollout status deployment deployment_name
+15. kubectl rollout history deployment deployment_name
+16. kubectl get service
+17. minikube service service_name --url
+18. curl url
+19. kubectl rollout undo deployment deployment_name
+20. kubectl rollout status deployment deployment_name
+21. curl url
+22. kubectl rollout history deplooyment deployment_name
+23. kubectl edit deployment deployment_name
+24. kubectl rollout status deployment deployment_name
+25. kubectl get pods
 
 
 
