@@ -1268,6 +1268,45 @@ Run Custom Image On Kubernetes
 12. kubectl delete deployment deployment_name
 13. kops delete cluster --name fabulouzfashion.com --yes --state=s3://kops-storage-b34598
 
+Setup Kubernetes On GCP Cloud
+# Add the Cloud SDK distribution URI as a package source
+1. echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+2. apt-get install apt-transport-https ca-certificates
+# Import the Google Cloud Platform public key
+3. curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+# Update the package list and install the Cloud SDK
+4. sudo apt-get update && sudo apt-get install google-cloud-sdk
+#Docker tip: If installing the Cloud SDK inside a Docker image, use a single RUN step instead:
+5. RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - && apt-get update -y && apt-get install google-cloud-sdk -y
+#Install Additional Packages
+6. sudo apt-get install google-cloud-sdk-app-engine-python
+7. sudo apt-get install google-cloud-sdk-app-engine-python-extras
+8. sudo apt-get install google-cloud-sdk-app-engine-java
+9. sudo apt-get install google-cloud-sdk-app-engine-go
+10. sudo apt-get install google-cloud-sdk-datalab
+11. sudo apt-get install google-cloud-sdk-datastore-emulator
+12. sudo apt-get install google-cloud-sdk-pubsub-emulator
+13. sudo apt-get install google-cloud-sdk-cbt
+14. sudo apt-get install google-cloud-sdk-cloud-build-local
+15. sudo apt-get install google-cloud-sdk-bigtable-emulator
+16. sudo apt-get install kubectl
+#Initialize GCloud CLI:
+17. gcloud init //User the link provided and copy paste and it will authenticate.
+#Set Google Project to Work On:
+18. gcloud config set project test-1512061290775
+#List All the Installed Components
+19. gcloud components list
+#Set Deployment/Compute Engine Zone, Type google cloud zones and search for the best zone available for you.
+20. gcloud config set compute/zone asia-south1-c //u can change it to b also
+#Enable Few APIs on Your Project //search for api & services in google cloud console
+#Click on Enable API's & Services and install all the below API's on Google Cloud
+#Search for the below API's
+21. Compute Engine API
+22. Kubernetes Engine API
+23. Google Container Registry API
+
+
+
 
 
 
