@@ -1354,6 +1354,11 @@ Replica Set In Kubernetes
 10. kubectl create -f pods.yml //it will create 2 pods
 11. kubectl create -f replicaset.yml //it will create only one pods as alread 2 are running with same name as frontend this is called known template base pods aquisition of the replica
 
+Deployment In Kubernetes
+1. See the pdf file.
+
+
+
 
 
 
