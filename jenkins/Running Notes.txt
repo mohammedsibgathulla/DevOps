@@ -1324,6 +1324,9 @@ Kubernetes Node Workflow
 #A kubeproxy will manage the internal traffic of the worker node. It will maage the ip's being used by the containers and pods and these will be managed inside the rule table called iptables inside   the linux system. iptables follow the mapping between the pods, containers and load balancer.
 - see the pdf file.
 
+Scaling Pods In Kubernetes
+- See the pdf file.
+
 
 
 
