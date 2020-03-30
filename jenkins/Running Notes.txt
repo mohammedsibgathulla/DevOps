@@ -1318,6 +1318,15 @@ Run Custom Image On GCP Kubernetes
 10. kubectl delete deployment magicalnginx
 11. gcloud container clusters delete mykubernetes-cluster
 
+Kubernetes Node Workflow
+#A node can have n no. of pods and a pod can have n no. of containers and better if they are tightly coupled (nod mandatory) basically serving as a application, all this pods are managed by Docker.
+#A kubelet will manage the communication between master and worker node. Each command fired by the master first comes to the kubelet and issue the direction to the worker node.
+#A kubeproxy will manage the internal traffic of the worker node. It will maage the ip's being used by the containers and pods and these will be managed inside the rule table called iptables inside   the linux system. iptables follow the mapping between the pods, containers and load balancer.
+- see the pdf file.
+
+
+
+
 
 
 
