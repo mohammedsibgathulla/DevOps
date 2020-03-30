@@ -1305,6 +1305,19 @@ Setup Kubernetes On GCP Cloud
 22. Kubernetes Engine API
 23. Google Container Registry API
 
+Run Custom Image On GCP Kubernetes
+1. gcloud container clusters create mykubernetes-cluster
+2. gcloud container clusters describe mykubernetes-cluster
+3. gcloud container clusters list 
+4. kubectl create deployment magicalnginx --image=anshuldevops/magicalnginx
+5. kubectl get deployments
+6. kubectl describe deployment magicalnginx
+7. kubectl create service loadbalancer magicalnginx --tcp=80:80
+8. kubectl get svc
+9. kubectl delete services magicalnginx
+10. kubectl delete deployment magicalnginx
+11. gcloud container clusters delete mykubernetes-cluster
+
 
 
 
