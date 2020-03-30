@@ -1152,9 +1152,10 @@ Setup Kubernetes With Mini Kube
 
 //Execute MiniKube & Create Cluster
 1. export CHANGE_MINIKUBE_NONE_USER=true
-2. sudo -E minikube start --vm-driver=none //MiniKube will create a vm inside your box that vm will work as a worker and your node will work as a master.
-3. echo ‘export CHANGE_MINIKUBE_NONE_USER=true’ >> ~/.bashrc
-4. kubectl cluster-info
+2. sudo apt install conntrack
+3. sudo -E minikube start --vm-driver=none //MiniKube will create a vm inside your box that vm will work as a worker and your node will work as a master.
+4. echo ‘export CHANGE_MINIKUBE_NONE_USER=true’ >> ~/.bashrc
+5. kubectl cluster-info
 
 //Interact Cluster Using KubeCtl
 - Let’s create a Kubernetes Deployment using an existing image named
@@ -1327,6 +1328,18 @@ Kubernetes Node Workflow
 Scaling Pods In Kubernetes
 - See the pdf file.
 
+Lab: Scaling Pods In Kubernetes With Replication Controller
+1. chmod 777 replication.yml
+2. kubectl create -f replication.yml
+2. kubectl get pods
+3. kubectl get rc //to get the names of replication controller
+4. kubectl describe rc/nginx(replication controller name)
+5. kubectl describe pod pod_name
+6. kubectl delete pod pod_name
+7. kubectl scale --replicas=10 rc/rc_name
+8. kubectl get pods
+9. kubectl scale --replicas=2 rc/rc_name
+10. kubectl delete rc/rc_name
 
 
 
