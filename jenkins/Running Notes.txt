@@ -1384,6 +1384,21 @@ Lab: Deployment In Kubernetes
 24. kubectl rollout status deployment deployment_name
 25. kubectl get pods
 
+Services In Kubernetes
+1. See pdf file of before commit.
+
+Lab: Services In Kubernetes
+1. chmod 777 podmanifest.yml
+2. kubectl create -f podmanifest.yml
+3. kubectl get pods
+4. chmod 777 podservice.yml
+5. kubectl create -f podservice.yml
+6. minikube service nginx-service --url
+7. curl url
+8. kubectl delete service nginx-service
+9. kubectl describe service nginx-service
+
+
 
 
 
