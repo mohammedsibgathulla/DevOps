@@ -1398,6 +1398,13 @@ Lab: Services In Kubernetes
 8. kubectl delete service nginx-service
 9. kubectl describe service nginx-service
 
+Labels In Kubernetes
+1. See pdf file.
+
+
+
+
+
 
 
 
