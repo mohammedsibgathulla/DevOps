@@ -1401,6 +1401,17 @@ Lab: Services In Kubernetes
 Labels In Kubernetes
 1. See pdf file.
 
+Lab: Labels In Kubernetes
+1. kubectl get nodes
+2. kubectl get nodes --show-labels # It will show all the labels attached with the nodes
+3. kubectl create -f podlabels.yml
+4. kubectl get pods
+5. kubectl describe pod pod-name
+6. kubectl get nodes
+7. kubectl label nodes minikube(it may be ur system name) disktype=ssd #It will add a lable with disktype: ssd to the existing node
+8. kubectl get nodes --show-labels
+9. kubectl get pods #Once u run the command the pending pod status will be Running as we have added the label disktype: ssd
+
 
 
 
