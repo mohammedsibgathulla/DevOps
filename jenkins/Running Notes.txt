@@ -1415,6 +1415,18 @@ Lab: Labels In Kubernetes
 Liveness(HealthCheck) Of Application In Kubernetes
 1. See pdf file.
 
+Demo Liveness(HealthCheck) Of Application In Kubernetes
+1. chmod 777 podliveness.yml
+2. kubectl create -f podliveness.yml
+3. kubectl describe pod liveness-exec //after 60 seconds the conainer will fail and restart
+4. kubectl get pods //you can see the restart count increases after every 60 seconds
+5. chmod 777 podlivenesshttp.yml
+6. kubectl create -f podlivenesshttp.yml
+7. kubectl describe pod liveness-http
+8. kubectl get pods
+
+
+
 
 
 
