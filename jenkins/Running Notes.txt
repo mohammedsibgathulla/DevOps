@@ -1412,6 +1412,9 @@ Lab: Labels In Kubernetes
 8. kubectl get nodes --show-labels
 9. kubectl get pods #Once u run the command the pending pod status will be Running as we have added the label disktype: ssd
 
+Liveness(HealthCheck) Of Application In Kubernetes
+1. See pdf file.
+
 
 
 
