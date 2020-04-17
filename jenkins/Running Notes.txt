@@ -1425,6 +1425,14 @@ Demo Liveness(HealthCheck) Of Application In Kubernetes
 7. kubectl describe pod liveness-http
 8. kubectl get pods
 
+Readiness In Kubernetes & Application
+- After the container is live it will start serving the traffic but the application may not be loaded due to which we will have downtime.
+In some cases the container will be live in few second but the application take around 40 to 50 minutes to get up inside the container.
+Hence in these cases we will go for Readiness probe. In some cases we don't need the Readiness & Liveness Probe as well u can check the pdf file for detail.
+1. chmod 777 podreadiness.yml
+2. kubectl create -f podrediness.yml
+3. kubectl get pods
+
 
 
 
