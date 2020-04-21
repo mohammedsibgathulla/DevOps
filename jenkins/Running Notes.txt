@@ -1445,13 +1445,25 @@ Secretes In Kubernetes
 2. kubectl get secrets
 3. kubectl create secret generic db-cred-special --from-literal=username=mohammedshaik81 --from-literal=password=$\!B\\*d\$zDsB
 4. kubectl get secrets
-5. echo -n 'mohammedshaik81' | base64
-6. echo -n '12345' | base64
+5. echo -n 'mohammedshaik81' | base64 -> bW9oYW1tZWRzaGFpazgx
+6. echo -n '12345' | base64 -> MTIzNDU=
 7. kubectl create -f secrets-manifest.yml
 8. kubectl get secrets
 9. kubectl describe secret secret-name
 10. kubectl get secret secret-name -o yaml/json
 11. echo 'base64string' | base64 --decode
+
+Lab: Secrets In Kubernetes
+1. chmod 777 podvolumesecrets.yml
+2. kubectl create -f podvoumesecrets.yml
+3. kubectl get pods
+4. kubectl describe pod podname
+5. kubectl exec -it podname -- /bin/bash
+6. cd /etc/foo/
+7. cat username
+8. cat password
+
+
 
 
 
