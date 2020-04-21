@@ -1433,6 +1433,14 @@ Hence in these cases we will go for Readiness probe. In some cases we don't need
 2. kubectl create -f podrediness.yml
 3. kubectl get pods
 
+Lifecycle Of Pods In Kubernetes
+1. chmod 777 podlifecyclehooks.yml
+2. kubectl create -f podlifecyclehookds.yml
+3. kubectl describe pod lifecycle-demo 
+4. kubectl exec -it lifecycle-demo -- /bin/bash
+5. cat /usr/share/message
+
+
 
 
 
