@@ -1466,6 +1466,46 @@ Lab: Secrets In Kubernetes
 Service Discovery Using DNS
 1. See pdf file.
 
+Lab: Service Discovery Using DNS
+//Executed the backend
+1. chmod 777 mysql-database.yml
+2. kubectl create -f mysql-database.yml
+3. kubectl logs database(podname) //These are not live logs
+4. kubectl logs --follow database //To see live logs 
+5. kubectl get pods
+6. kubectl exec -it database -- mysql -u root -p //To go inside the mysqldb 
+7. Enter the password defined in the yml file.
+8. use database-name
+9. show databases;
+10. show tables;
+
+//Execute the backend service to connect front end
+1. chmod mysqldb-service.yml
+2. kubectl create -f mysqldb-service.yml
+3. kubectl get services
+
+//Execute the application
+1. chmod 777 nodejs-web.yml
+2. kubectl create -f nodejs-web.yml
+3. kubectl describe deployment deployment-name
+4. kubectl get pods
+5. kubectl logs --follow podname
+
+
+//Execute the service for the front end to get the application url
+1. chmod 777 nodejs-service.yml
+2. kubectl create -f nodejs-service.yml
+3. kubectl get services
+4. minikube service nodejs-web-service --url
+
+//To see the data stored through the application
+1. kubectl exec database -it -- mysql -u root -p
+2. use helloworld
+3. show tables;
+4. select * from vistits;
+
+    
+
 
 
 
