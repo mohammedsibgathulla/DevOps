@@ -1507,6 +1507,42 @@ Lab: Service Discovery Using DNS
 Config Map In Kubernetes
 - See pdf file.
 
+Lab: ConfigMap In Kubernetes
+//Create configmap from the file
+1. kubectl create configmap front-end-config --from-file=front-end-config
+2. kubectl describe configmap front-end-config
+
+//Create configmap from the literal
+3. kubectl create configmap some-config --from-literal=front.size=14px --from-literal=color.default=green
+4. kubectl get configmap some-config -o yaml
+
+//Create configmap from the yml file
+5. kubectl create -f simple-configmap.yml
+6. kubectl get configmap simple-configmap -o yaml
+
+//Use configmap in containers
+7. kubectl create -f demo-web-pod.yml
+8. kubectl describe pod demo-web
+9. kubectl exec -it demo-web -- /bin/bash
+10. printenv STRATEGY_RISK //To print any environment variable
+
+//In case where you have multiple key value pairs or multiple configuration assign to your pod in that case u can't defnine
+each and every configuration in you yml file and execute the container bcoz this will create a lot of dependency and errorprone.
+Hence we use POSIX environment variables
+11. kubectl create -f posix-config.yml
+12. kubectl get configmap name -o json
+13. kubectl create -f posix-pod-demo.yml 
+14. kubectl describe pod podname
+15. kubectl exec -it demo-posix-env -- /bin/bash
+16. env // You will get the complete environment variables of the container
+
+//Use configMap in container volumes
+1. kubectl create -f demo-config-pod.yml
+2. kubectl describe pod podname
+3. kubectl exec -it podname -- /bin/bash
+4. cd /etc/config/
+5. ls
+6. cat strategy.type
 
 
 
