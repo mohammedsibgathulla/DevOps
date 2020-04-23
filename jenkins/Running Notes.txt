@@ -1504,7 +1504,12 @@ Lab: Service Discovery Using DNS
 3. show tables;
 4. select * from vistits;
 
-    
+Config Map In Kubernetes
+- See pdf file.
+
+
+
+
 
 
 
