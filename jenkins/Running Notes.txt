@@ -1463,6 +1463,10 @@ Lab: Secrets In Kubernetes
 7. cat username
 8. cat password
 
+Service Discovery Using DNS
+1. See pdf file.
+
+
 
 
 
