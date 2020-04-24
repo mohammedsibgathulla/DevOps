@@ -1563,6 +1563,10 @@ Lab: Ingress In Kubernetes
 13. minikube ip
 14. curl ip -H 'Host: nginx-official.example.com'
 
+Volume In Kubernetes
+- Kubernetes support 12 to 15 kind of volumes. You can google for more details on volumes.
+- See the pdf file for more details.
+
 
 
 
