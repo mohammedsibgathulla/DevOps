@@ -1544,6 +1544,10 @@ Hence we use POSIX environment variables
 5. ls
 6. cat strategy.type
 
+Ingress In Kubernetes
+- See pdf file.
+
+
 
 
 
