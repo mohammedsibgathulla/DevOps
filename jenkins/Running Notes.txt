@@ -1584,6 +1584,37 @@ EmptyDir Volume In Kubernetes
 13. cd /data/redis/ You can see the file test_file.txt it will not be deleted. If we remove the container that data will be erased.
 
 
+HostPath Volume In Kubernetes
+1. minikube status
+2. minikube ssh
+3. pwd
+4. id -un
+5. mkdir /home/docker/data
+6. cd /home/docker/data/
+7. pwd
+8. vi index.html 
+9. ls
+10. ls -lrt
+11. sudo chmod 777 index.html
+12. ls -lrt
+13. vi index.html //Enter some content
+14. cat index.html
+15. exit
+16. kubectl create -f hostpath-pv.yml //Here there is 10 GB Persistent Volume
+17. kubectl get persistentvolume pv-local
+18. kubectl create -f hostpath-pvc.yml //Herer we are claimin 5 GB of 10 GB Persistent Volume
+19. kubectl get persistentvolumeclaim hostpath-pvc 
+20. kubectl create -f apache-deployment.yml
+21. kubectl get pods
+22. kubectl expose deployment httpd --type=NodePort
+23. minikube service httpd --url
+24. curl url
+25. kubectl get pods
+26. kubectl exec -it podname -- /bin/bash
+27. curl localhost:80 
+28. apt-get update
+29. apt-get install curl
+30. curl localhost:80 
 
 
 
