@@ -1547,6 +1547,22 @@ Hence we use POSIX environment variables
 Ingress In Kubernetes
 - See pdf file.
 
+Lab: Ingress In Kubernetes
+1. kubectl create -f nginx-deployment.yml
+2. kubectl get deployment
+3. kubectl describe deployment deployment_name
+4. kubectl create -f nginx-deployment-service.yml
+5. kubectl create -f magicalnginx-deployment.yml
+6. kubectl create -f magicalnginx-service.yml
+7. kubectl get services
+8. minikube service service-name --url
+9. curl --url
+10. kubectl create -f ingreess-controller.yml
+11. kubectl get ingress
+12. kubectl describe  ingress nginx-rules
+13. minikube ip
+14. curl ip -H 'Host: nginx-official.example.com'
+
 
 
 
