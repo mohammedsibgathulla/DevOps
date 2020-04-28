@@ -1619,6 +1619,156 @@ HostPath Volume In Kubernetes
 Dynamic Volume Provisioning In Kubernetes
 1. See the pdf file.
 
+Dynamic Volume: Run Wordpress On Kubernetes
+1. minikube status
+2. minikube stop
+3. Setup AWS IAM permission for Kops
+Permissions required for Kops user.
+AmazonEC2FullAccess
+AmazonRoute53FullAccess
+AmazonS3FullAccess
+IAMFullAccess
+AmazonVPCFullAccess
+//Aws Console
+4. Go to Service -> IAM
+5. Go to Users -> Add a User -> kops (username)
+6. Select programatic access.
+7. Create a new group -> kopsUserGroup (group name) -> Select Adminstrator Access
+8. Add Tags -> key -> user & value -> kops (You can put anthing here) -> create user.
+9. You will get Access Key Id & Secret Key
+
+//In your local terminal
+10. aws configure
+11. Enter the Access Key Id & Secret Key
+12. Default region name: Press Enter
+13. Default output format: Press Enter
+14. ls -lrt ~/.aws/      //To verify configuration
+15. cat ~/.aws/credentials //To verify configuration
+
+//Create S3 bucket for KOPST_STATE_STORE
+//Aws Console
+16. Service -> Storage -> S3 -> Create Bucket -> kops-storage-b3459235 (Name //U can give any name)
+17. www.cloudping.info -> choose the region
+18. Select the region
+19. Add tags -> user & kops //random
+20. Uncheck block public access.
+21. Create bucket.
+
+//Setup DNS for the Kops Cluster
+22. Services -> Networking & Content Delivery -> Route 53
+23. Dnsmanagement -> Create Hosted Zone -> Enter domain name -> Create.
+24. You will get the NS records for your domain.
+25. Update those NS records in the domain registrar console panel.
+
+Kubernetes Setup On AWS Cloud
+1. ssh-keygen -f .ssh/id_rsa //hit enter twice after this
+2. cat .ssh/id_rsa.pub
+3. Rename kops-linux-amd64 to kops if the directory is present 
+4. cd /usr/local/bin/
+5. sudo mv /usr/local/bin/kops-linux-amd64 /usr/local/bin/kops If it is not present skip 3, 4, & 5.
+
+//Create a Kubernetes Cluster
+6. kops create cluster --yes --state=s3://kops-storage-b3459235 --zones=ap-south-1a --node-count=2 --node-size=t2.micro --master-size=t2.micro --name=fabulouzfashion.com --ssh-public-key ~/.ssh/id_rsa.pub //Here you haved added --node-count=2 it is optional if you don't specify 3 are created by default.
+
+If you have a domain
+6. kops create cluster --yes --state=s3://kops-storage-b3459235 --zones=ap-south-1a --node-size=t2.micro --master-size=t2.micro --name=fabulouzfashion.com
+If you don't have domain
+6. kops create cluster --yes --state=s3://kops-storage-b3459235 --zones=ap-south-1a --node-size=t2.micro --master-size=t2.micro --name=test.k8s.local
+
+//You can use any of the above according to your requirement.
+
+8. kops validate cluster --state=s3://kops-storage-b3459235 
+   kops validate cluster --state=s3://kops-storage-b3459235 -o json /yaml
+//The above command may show Validation Failed. The validation of the kubernetes cluster will take 10 to 15 minutes. You have to wait and then run the command again.
+
+9. In EC2 Dashboard you can see 5 volumes
+
+//In your local terminal
+10. kubectl create -f storageclass.yml -> storageclass.storage.k8s.io/aws-standard created
+11. kubectl describe storageclass.storage.k8s.io/aws-standard
+//In the static you need to create the storage volume and then u need to claim that particular storage volume.
+But in the dynamic one you can create the object and that volume will be created at runtime when you will claim it. It will save your cost as well. Bcoz on cloud nothing is free. If you are creating 100 GB database you have occupied 100 GB Disk before creating the persistence volume claim. Suppose you want to deploy your system and it will be deployed tomorrow and today your are just doing the preparation as pre maintenance and u are creating the volume today so you are providing 24 hrs extra billing to the cloud service provider for that particular disk. So dynamic volume creation is always preferred. 
+
+12. kubectl create -f pv-claim.yml
+13. kubectl describe persistentvolumeclaim/mysqldb-storage
+
+//Now if you go and see in the aws console you will have 6 volumes and a new volume will be create with name as fabulouzfashion.com-dynamic-pvc-5dc00110-97ff-4c35-b08c-2ad2cc7b13d3
+
+14. kubectl create -f secrets.yml
+15. kubectl create -f mysqldb.yml -> replicationcontroller/wordpress-db 
+16. kubectl describe replicationcontroller/wordpress-db 
+18. kubectl get pods
+19. kubectl logs --follow wordpress-db-6f2tl
+20. kubectl get pod
+21. kubectl create -f mysqldbservice.yml
+22. kubectl create -f wordpress.yml
+23. kubectl describe deployment.apps/wordpress-deployment
+24. kubectl get pod
+25. kubectl create -f wordpress-service.yml
+
+//Now if you go and see in the aws console you can see that a new Load Balancer will be created.
+If you don't have any domain name then you can copy the DNS Name in the Load Balancer description and access wordpress i.e a7dbafcb62dab4978840ae8df049a48f-1616729049.ap-south-1.elb.amazonaws.com
+If you are using the domain name fabulouzfashion.com
+26. Route53 service -> Hosted Zones -> Selcect Your Created Hosted Zone -> Create Record Set -> Name = fabwordpress -> Alias = Yes -> Alias Target = Load Balncer Id (...) -> Create
+28. Install Wordpress
+29. No you can access the website at fabwordpress.fabulouzfashion.com
+
+//In your local terminal
+30. kubectl get pods
+31. kubectl delete pod wordpress-db-6f2tl // we are deleting the pod of mysql db, but a new container will be created.
+//Again you refresh the website the content will be the same bcoz the data which has created in mysql database is present on the mounted location on the Aws. It is not container dependent right now
+//So we have seperated the persistence disk from stateful application to the mounted point which is on the Aws.
+//Untill and unless we will delete our persistent volume claim this data will not be erased. Once we delete the persistent volume claim the data will be deleted. Hence when we are working in organizatin we need to ensure what is the Retintion / Reclaim Policy of your Storage Class. If your Storage Class Reclaim Policy is default it is not retained. Then we have to make sure that we are not deleting any Persistent Volume Claim otherwise you will loose your whole data. 
+
+32. kops delete cluster --name=fabulouzfashion.com --yes --state=s3://kops-storage-b3459235 //It will delete all the deployments from your aws cluster.
+33. kops delete cluster --name=test.k8s.local --yes --state=s3://kops-storage-b3459235 
+
+Creating a Service-Linked Role (Console)
+
+Before you create a service-linked role in IAM, find out whether the linked service automatically creates service-linked roles, In addition, learn whether you can create the role from the service's console, API, or CLI.
+
+To create a service-linked role (console)
+
+    Sign in to the AWS Management Console and open the IAM console at https://console.aws.amazon.com/iam/
+
+.
+
+In the navigation pane of the IAM console, choose Roles. Then choose Create role.
+
+Choose the AWS Service role type, and then choose the service that you want to allow to assume this role.
+
+Choose the use case for your service. If the specified service has only one use case, it is selected for you. Use cases are defined by the service to include the trust policy required by the service. Then choose Next: Permissions.
+
+Choose one or more permissions policies to attach to the role. Depending on the use case that you selected, the service might do any of the following:
+
+    Define the permissions used by the role
+
+    Allow you to choose from a limited set of permissions
+
+    Allow you to choose from any permissions
+
+    Allow you to select no policies at this time, create the policies later, and then attach them to the role.
+
+Select the box next to the policy that assigns the permissions that you want the role to have, and then choose Next: Tags.
+Note
+
+The permissions that you specify are available to any entity that uses the role. By default, a role has no permissions.
+
+Choose Next: Review. You cannot attach tags to service-linked roles during creation. For more information about using tags in IAM, see Tagging IAM Users and Roles.
+
+For Role name, the degree of role name customization is defined by the service. If the service defines the role's name, then this option is not editable. In other cases, the service might define a prefix for the role and allow you to type an optional suffix.
+
+If possible, type a role name suffix to add to the default name. This suffix helps you identify the purpose of this role. Role names must be unique within your AWS account. They are not distinguished by case. For example, you cannot create roles named both <service-linked-role-name>_SAMPLE and <service-linked-role-name>_sample. Because various entities might reference the role, you cannot edit the name of the role after it has been created.
+
+(Optional) For Role description, edit the description for the new service-linked role.
+
+Review the role and then choose Create role.
+
+
+
+
+
+
 
 
 
