@@ -1764,6 +1764,11 @@ If possible, type a role name suffix to add to the default name. This suffix hel
 
 Review the role and then choose Create role.
 
+Pod Presets In Kubernetes
+- You can use multiple persets on a single pod & viceversa.
+- See the pdf file.
+
+
 
 
 
