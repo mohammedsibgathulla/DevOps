@@ -1616,6 +1616,9 @@ HostPath Volume In Kubernetes
 29. apt-get install curl
 30. curl localhost:80 
 
+Dynamic Volume Provisioning In Kubernetes
+1. See the pdf file.
+
 
 
 
