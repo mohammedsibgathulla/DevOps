@@ -1806,6 +1806,32 @@ spec:
 Stateful Sets In Kubernetes
 - See the pdf file.
 
+Deploy Cassandra In StateFul Set
+1. minikube stop
+//Cassandra Database requirest atleast 1 GB RAM to spin up. You have to choose t2.small
+2. kops create cluster --yes --state=s3://kops-storage-b3459235 --zones=ap-south-1a --node-size=t2.small --master-size=t2.small --name=fabulouzfashion.com
+3. kops validate cluster --state=s3://kops-storage-b3459235
+4. kubectl create -f cassandra-statefulset.yml
+5. kubectl get pods
+5. kubectl get pods -w -l statefulset.apps/cassandra  //Monitor the pods livestate during the deployment
+7. watch kubectl get pod //To see live status of your pod
+8. kubectl edit pod //In insert mode change the replicas to 2.
+9. kubectl get pv //To see the persistent volumes
+10. kubectl exec -it cassandra-0 -- nodetool status
+11. kubectl get pods
+12. kubectl delete pod cassandra-1
+13. kubectl exec -it cassandra-0 -- nodetool status
+14. kubectl get pods //The deleted pod will spin up again with same name. If you do the same with the replication controller or replicaset or deployment then you will get some new name of the particular pod which was deleted.
+15. kubectl edit StatefulSet cassandra // In Insert mode at replicas edit to 0 In order to delete the StatefulSet 
+16. kubectl get pods //If you delete the Stateful Set directly then it will not gurantee that the pods will be deleted.
+17. kubectl get StatefulSet
+18. kubectl delete StatefulSet cassandra //But in the aws all the volumes will be there in avaliable state. Hence if you want to remove the volumes 
+19. kubectl get pvc
+20. kubectl delete pvc volname
+21. kubectl delete pvc --all //To delete all the volumes
+22. kops delete cluster --state=s3://kops-storage-b3459235 fabulouzfashion.com --yes
+
+
 
 
 
