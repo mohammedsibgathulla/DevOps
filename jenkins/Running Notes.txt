@@ -1801,7 +1801,11 @@ spec:
           command: ["mysqld"]
 
 18. kubectl create -f mysql-db.yml
-19. kubectl describe name //You will get the same environmental variable as in mysql-pod. It means the admission controller is working fine. All the changes which are present in the existing pod preset will also reflect in the new pod it will create with the same label and the same selector. We have seen the use of the Podpreset and the Admission Controller.          
+19. kubectl describe name //You will get the same environmental variable as in mysql-pod. It means the admission controller is working fine. All the changes which are present in the existing pod preset will also reflect in the new pod it will create with the same label and the same selector. We have seen the use of the Podpreset and the Admission Controller.    
+
+Stateful Sets In Kubernetes
+- See the pdf file.
+
 
 
 
