@@ -1768,7 +1768,40 @@ Pod Presets In Kubernetes
 - You can use multiple persets on a single pod & viceversa.
 - See the pdf file.
 
+Enable & Execute PodPresets In Kubernetes
+1. kops create cluster --yes --state=s3://kops-storage-b3459235 --zones=ap-south-1a --node-size=t2.micro --master-size=t2.micro --name=fabulouzfashion.com
+   kops create cluster --yes --state=s3://kops-storage-b3459235 --zones=ap-south-1a --node-size=t2.micro --master-size=t2.micro --name=test.k8s.local
+2. kops validate cluster --state=s3://kops-storage-b3459235
+3. kops get cluster --state=s3://kops-storage-b3459235                   #It will display the cluster name
+4. kops edit cluster --state=s3://kops-storage-b3459235 test.k8s.local
+5. Search for kubeAPIServer -> /kubeAPIServer Press enter -> Pattern not found: kubeAPIServer
+6. You copy paste the content from spec file in the same line of topology.
+7. kops update cluster --state=s3://kops-storage-b3459235 test.k8s.local
+8. update edit cluster --state=s3://kops-storage-b3459235 test.k8s.local --yes
+9. kops rolling-update cluster --state=s3://kops-storage-b3459235 //It will restart all the kubernetes nodes one by one.
+10. kops rolling-update cluster --state=s3://kops-storage-b3459235 --yes
+11. kubectl create -f mysql-pod-preset.yml
+12. kubectl describe name
+13. kubeclt create -f mysql-pod.yml
+14. kubectl describe name
+15. cp mysql-pod.yml mysql-db.yml
+16. ls
+17. vi mysql-db.yml
+apiVersion: v1
+kind: Pod
+metadata:
+    name: mysql-test
+    labels:
+        app: mysql-server
+        role: mysql-database
+spec:
+    containers:
+        - name: mysql
+          image: mysql:8.0
+          command: ["mysqld"]
 
+18. kubectl create -f mysql-db.yml
+19. kubectl describe name //You will get the same environmental variable as in mysql-pod. It means the admission controller is working fine. All the changes which are present in the existing pod preset will also reflect in the new pod it will create with the same label and the same selector. We have seen the use of the Podpreset and the Admission Controller.          
 
 
 
