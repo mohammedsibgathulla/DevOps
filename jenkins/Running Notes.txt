@@ -1880,6 +1880,8 @@ Lab: Affinity In Kubernetes
 9. kubectl describe pod-name
 10. opeartor: Not-In //You have to update in node-affinity.yml for anti affinity
 
+Architecture & Working Model Of Master Component
+- See the pdf file.
 
 
 
