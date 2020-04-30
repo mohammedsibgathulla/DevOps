@@ -2003,6 +2003,56 @@ Demo: Kubernetes HA Deployment
 HELM: Introduction
 - See the pdf file.
 
+Installing & Running HELM On Kubernetes
+1. kops create cluster --yes --state=s3://kops-storage-b3459235 --zones=ap-south-1a --node-size=t2.micro --master-size=t2.micro --authorization=RBAC --name=fabulouzfashion.com
+2. kops validate cluster --state=s3://kops-storage-b3459235
+3. kubectl api-versions
+4. wget https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz
+5. chmod 655 helm-v2.14.1-linux-amd64.tar.gz
+5. tar -xzvf helm-v2.14.1-linux-amd64.tar.gz
+6. cd linux-amd64/ -> ls cat README.md -> cd ..
+7. sudo mv linux-amd64/helm /usr/local/bin/helm
+8. cd /usr/local/bin/ -> ls
+9. helm -h 
+10. kubectl create -f helm-rbac.yml
+11. helm init --service-account helm-tiller 
+12. kubectl get pods -n kube-system 
+//The above way didn't worked
+
+
+//Alternate Way of Installing Helm
+1. kubectl cluster-info
+2. kubectl config get-contexts
+3. kubectl config use-context context-name
+4. curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > install-helm.sh
+5. chmod u+x install-helm.sh
+6. ./install-helm.sh  //You will get the output as helm installed into /usr/local/bin/helm Run 'helm init' to configure helm.
+7. kubectl -n kube-system create serviceaccount tiller
+8. kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
+9. helm init --service-account tiller
+10. kubectl get pods --namespace kube-system
+
+1. helm search <Application Name>nginx/redis
+2. helm install <Application Name>stable/redis
+3. helm install --name <releasename> <ApplicationName> 
+4. helm ls
+5. helm install --name prodredishelm stable/redis
+6. kubectl get secret --namespace default prodredishelm -o jsonpath="{.data.redis-password}" | base64 --decode //It will display the password (rilYrv7BzF)
+7. kubectl run --namespace default prodredishelm-client --rm --tty -i --restart='Never' --env REDIS_PASSWORD=rilYrv7BzF --image docker.io/bitnami/redis:5.0.7-debian-10-r32 -- bash
+8. echo $REDIS_PASSWORD
+9. redis-cli -h prodredishelm-master -a $REDIS_PASSWORD
+10. help
+11. set mohammed softwaredeveloper
+12. exit
+13. kubectl get pods
+14. kubectl get pvc
+15. helm ls
+16. helm delete prodredishelm
+17. kubectl get all
+
+
+
+
 
 
  
