@@ -1846,6 +1846,10 @@ Points to remember
 # You must speciyf a pod selector that matches the labels of template
 # You shoud not create any pods whose labels match this selector, either directly, via another DaemonSet, or via other controller such as ReplicaSet. Otherwise, DaemonSet controller will think that those Pods were created by it. 
 
+AutoScaling In Kubernetes
+- See the pdf file.
+
+
 
 
 
