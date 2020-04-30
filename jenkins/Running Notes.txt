@@ -1831,6 +1831,9 @@ Deploy Cassandra In StateFul Set
 21. kubectl delete pvc --all //To delete all the volumes
 22. kops delete cluster --state=s3://kops-storage-b3459235 fabulouzfashion.com --yes
 
+DaemonSet In Kubernetes
+- See the pdf file.
+
 
 
 
