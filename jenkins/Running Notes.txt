@@ -1967,6 +1967,9 @@ Role Base Access Control Implementation
 37. kubectl get pods --namespace=mynamespace
 38. kubectl get pods -A //It will not work here. Error from server (Forbidden): pods is forbidden: User "peter" cannot list resource "pods" in API group "" at the cluster scope
 39. kubectl delete pod nginx-deployment-5f847d84b8-8zbjg //forbidden: User "peter" cannot delete resource "pods" in API group "" in the namespace "mynamespace"
+
+Networking In Kubernetes
+- See the pdf file.
  
 
 
