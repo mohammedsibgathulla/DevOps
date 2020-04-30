@@ -1985,6 +1985,22 @@ Node Management
 Kubernetes In Production: High Availability
 - See the pdf file.
 
+Demo: Kubernetes HA Deployment
+1. kops create cluster --yes --state=s3://kops-storage-b3459235 --zones="ap-south-1a,ap-south-1b" --node-size=t2.micro --master-size=t2.micro --master-count 3 --node-count 5 --authorization=RBAC --name=fabulouzfashion.com --dns-zone=fabulouzfashion.com
+2. kops validate cluster --state=s3://kops-storage-b3459235
+3. kubectl get nodes -A
+4. kubectl get nodes -o wide
+5. kubectl create -f nginx-deployment.yml
+6. kubectl get svc / service
+7. kubectl describe svc service-name //copy the load balancer url and hit it in the browser u can configure the url in the hosted zone
+8. kubectl get pods -o wide
+9. kubectl create -f live-chat.yml //One more load balancer will spin up
+10. kubectl get pods 
+11. kubectl get svc
+12. kuebctl describe svc chat //copy the load balancer url and hit it in the browser u can configure the url in the hosted zone
+13. kops delete cluster --state=s3://kops-storage-b3459235 fabulouzfashion.com --yes 
+
+
 
  
 
