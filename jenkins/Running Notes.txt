@@ -1919,6 +1919,9 @@ Lab: Resource Quota In Kubernetes
 User Management In Kubernetes
 - See the pdf file.
 
+Role Base Access Control (RBAC) In Kubernetes
+- See the pdf file.
+
 
 
 
