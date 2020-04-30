@@ -1868,6 +1868,19 @@ Lab: AutoScaling In Kubernetes
 Affinity In Kubernetes
 - See the pdf file.
 
+Lab: Affinity In Kubernetes
+1. kops create cluster --yes --state=s3://kops-storage-b3459235 --zones=ap-south-1a --node-size=t2.micro --master-size=t2.micro --name=fabulouzfashion.com
+2. kops validate cluster --state=s3://kops-storage-b3459235
+3. kubectl get nodes --show-labels
+4. kubectl label nodes ip-172-20-33-27.ap-south-1.compute.internal disk-type=ssd //To tag or label your particular node
+5. kubectl describe node ip-172-20-33-27.ap-south-1.compute.internal
+6. kubectl create -f nodeselector.yml
+7. kubectl describe pod-name
+8. kubectl create -f node-affinity.yml
+9. kubectl describe pod-name
+10. opeartor: Not-In //You have to update in node-affinity.yml for anti affinity
+
+
 
 
 

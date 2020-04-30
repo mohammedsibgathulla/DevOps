@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hpa-example
+  name: php-apache
 spec:
   selector:
     matchLabels:
-      run: hpa-example
+      run: php-apache
   replicas: 1
   template:
     metadata:
       labels:
-        run: hpa-example
+        run: php-apache
     spec:
       containers:
-      - name: hpa-example
-        image: gcr.io/google_containers/hpa-example
+      - name: php-apache
+        image: k8s.gcr.io/hpa-example
         ports:
         - containerPort: 80
         resources:
@@ -22,17 +22,18 @@ spec:
             cpu: 500m
           requests:
             cpu: 200m
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
-    name: hpa-example
+  name: php-apache
+  labels:
+    run: php-apache
 spec:
-    ports:
-    - port: 31010
-      nodePort: 31010
-      targetPort: http-port
-      protocol: TCP
-    selector:
-        app: hpa-example
-    type: NodePort
+  ports:
+  - port: 80
+  selector:
+    run: php-apache
+
