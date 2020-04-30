@@ -1970,6 +1970,19 @@ Role Base Access Control Implementation
 
 Networking In Kubernetes
 - See the pdf file.
+
+Node Management
+1. kops validate cluster --state=s3://kops-storage-b3459235
+2. kubectl get nodes
+3. kubectl get pods
+4. kubectl get pods -o wide
+5. kubectl get nodes
+6. kubectl drain ip-172-20-51-30.ap-south-1.compute.internal --ignore-daemonsets=false
+7. kubectl get pods
+8. kubectl get pods -o wide //All the pods are scheduled on other nodes but no pod is scheduled on the drained node. Now u can do maintenance on the drained node.
+9. kubectl uncordon ip-172-20-51-30.ap-south-1.compute.internal //After maintenance u can put the node back
+
+
  
 
 
