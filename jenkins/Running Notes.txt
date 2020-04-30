@@ -1886,6 +1886,9 @@ Architecture & Working Model Of Master Component
 Manage Resource Quota In Kubernetes
 - See the pdf file.
 
+Resource Quota In Kubernetes
+- See the pdf file.
+
 
 
 
