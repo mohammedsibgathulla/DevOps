@@ -1916,6 +1916,8 @@ Lab: Resource Quota In Kubernetes
 24. kubectl create -f dep-without-quota.yml 
 25. kubectl get deployment --namespace=mynamespace
 
+User Management In Kubernetes
+- See the pdf file.
 
 
 
