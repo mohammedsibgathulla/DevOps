@@ -1865,6 +1865,9 @@ Lab: AutoScaling In Kubernetes
 
 #The above example is not working.
 
+Affinity In Kubernetes
+- See the pdf file.
+
 
 
 
