@@ -1849,6 +1849,23 @@ Points to remember
 AutoScaling In Kubernetes
 - See the pdf file.
 
+Lab: AutoScaling In Kubernetes
+1. kops create cluster --yes --state=s3://kops-storage-b3459235 --zones=ap-south-1a --node-size=t2.micro --master-size=t2.micro --name=fabulouzfashion.com
+2. kops validate cluster --state=s3://kops-storage-b3459235
+3. kubectl get service,hpa,pod,deployment -owide //it will show you the status of services running on your cluster the hpa
+4. watch -n1 !!
+5. kubectl create -f autoscaling.yml
+6. kubectl autoscale deployment hpa-example --min=2 --max=10 --cpu-percent=50
+7. kubectl describe hpa //you will get an error
+8. kubectl get hpa
+8. kubectl delete -n kube-system deployments.apps metrics-server //delete existing metrics-server if any
+9. git clone https://github.com/kubernetes-incubator/metrics-server.git
+10. kubectl delete hpa
+11. kubectl delete deployment
+
+#The above example is not working.
+
+
 
 
 
