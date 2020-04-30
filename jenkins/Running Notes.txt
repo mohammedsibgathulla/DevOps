@@ -1883,6 +1883,9 @@ Lab: Affinity In Kubernetes
 Architecture & Working Model Of Master Component
 - See the pdf file.
 
+Manage Resource Quota In Kubernetes
+- See the pdf file.
+
 
 
 
