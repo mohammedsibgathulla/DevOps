@@ -2000,6 +2000,9 @@ Demo: Kubernetes HA Deployment
 12. kuebctl describe svc chat //copy the load balancer url and hit it in the browser u can configure the url in the hosted zone
 13. kops delete cluster --state=s3://kops-storage-b3459235 fabulouzfashion.com --yes 
 
+HELM: Introduction
+- See the pdf file.
+
 
 
  
