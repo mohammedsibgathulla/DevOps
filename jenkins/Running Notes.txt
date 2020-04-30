@@ -1889,6 +1889,36 @@ Manage Resource Quota In Kubernetes
 Resource Quota In Kubernetes
 - See the pdf file.
 
+Lab: Resource Quota In Kubernetes
+1. kops validate cluster --state=s3://kops-storage-b3459235
+2. kubectl get namespaces
+3. kubectl get namespaces --show-labels
+4. kubectl create -f resource-quota.yml
+5. kubectl get namespaces
+6. kubectl get resourcequota
+7. kubectl get resourcequota --namespace=mynamespace
+8. kubectl create -f dep-without-quota.yml
+9. kubectl get deployment --namespace=mynamespace
+10. kubectl describe deployment --namespace=mynamespace //None of the container will be deployed
+11. kubectl get rs --namespace=mynamespace
+12. kubectl describe rs --namespace=mynamespace //failed quota: user-compute-quota: must specify limits.cpu,limits.memory,requests.cpu,requests.memory
+13. kubectl create -f dep-with-quota.yml
+14. kubectl get deployment --namespace=mynamespace //1 replica failed
+15. kubectl get rs --namespace=mynamespace
+16. kubectl describe rs --namespace=mynamespace //forbidden: failed quota: user-compute-quota: must specify limits.cpu,limits.memory,requests.cpu,requests.memory (Here quota is exceeding we have specified 1 Gi memory but here for 3 replicas it is 1.5 Gi so one replica failed)
+17. kubectl get quota user-compute-quota --namespace=mynamespace
+18. kubectl describe quota user-compute-quota --namespace=mynamespace
+19. kubectl delete deployment helloworld-deployment --namespace=mynamespace
+20. kubectl describe quota user-compute-quota --namespace=mynamespace
+21. kubectl create -f default-limit.yml 
+22. kubectl describe limitrange/limits-quota --namespace=mynamespace
+23. kubectl delete deployment nginx-deployment --namespace=mynamespace
+24. kubectl create -f dep-without-quota.yml 
+25. kubectl get deployment --namespace=mynamespace
+
+
+
+
 
 
 
