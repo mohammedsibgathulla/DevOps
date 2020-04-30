@@ -1834,6 +1834,18 @@ Deploy Cassandra In StateFul Set
 DaemonSet In Kubernetes
 - See the pdf file.
 
+Lab: DaemonSet In Kubernetes
+1. kops create cluster --yes --state=s3://kops-storage-b3459235 --zones=ap-south-1a --node-size=t2.micro --master-size=t2.micro --name=fabulouzfashion.com
+2. kops validate cluster --state=s3://kops-storage-b3459235
+3. kubectl get nodes
+4. kubectl create -f daemonset.yml
+5. kubectl get pods //3 pods will be created each for single node.
+6. kops delete cluster --state=s3://kops-storage-b3459235 fabulouzfashion.com --yes
+Points to remember
+# When a DaemonSet is created the selector cannot be changed.
+# You must speciyf a pod selector that matches the labels of template
+# You shoud not create any pods whose labels match this selector, either directly, via another DaemonSet, or via other controller such as ReplicaSet. Otherwise, DaemonSet controller will think that those Pods were created by it. 
+
 
 
 
