@@ -1922,6 +1922,54 @@ User Management In Kubernetes
 Role Base Access Control (RBAC) In Kubernetes
 - See the pdf file.
 
+Role Base Access Control Implementation
+- RBAC works only on Kubernetes Cluster 1.9+
+- RBAC is not enabled by default on Cluster. User needs to enable it.
+1. kubectl api-versions
+2. kops create cluster --yes --state=s3://kops-storage-b3459235 --zones=ap-south-1a --node-size=t2.micro --master-size=t2.micro --authorization=RBAC --name=fabulouzfashion.com
+3. minikube start --extra-config=apiserver.Authorization.MODE=RBAC
+4. kops validate cluster --state=s3://kops-storage-b3459235
+5. kubectl get namespace
+6. kubectl create -f rbac-role.yml
+7. kubectl config get-contexts //Till now we are using the admin config file
+//Retrieve Keys From KOPS
+8. aws s3 sync s3://kops-storage-b3459235/fabulouzfashion.com/pki/private/ca/ ca-key
+9. aws s3 sync s3://kops-storage-b3459235/fabulouzfashion.com/pki/issued/ca/ ca-crt
+10. ls 
+11. cd ca-crt -> ls
+12. mv ca-key/*.key ca.key -> ls
+13. mv ca-crt/*.crt ca.crt -> ls //Now we can apply these keys and certificates with any user we want.
+//Create new user
+14. sudo apt install openssl
+15. openssl genrsa -out peter.pem 2048 -> ls
+16. openssl req -new -key peter.pem -out peter-csr.pem -subj "/CN=peter/O=myteam/"
+17. openssl x509 -req -in peter-csr.pem -CA ca.crt -CAkey ca.key -CAcreateserial -out peter.crt -days 10000
+//Add new context
+18. kubectl config set-credentials peter --client-certificate=peter.crt --client-key=peter.pem
+19. kubectl config set-context peter --cluster=fabulouzfashion.com --user peter
+20. kubectl config get-contexts
+21. kubectl get nodes
+22. kubectl config use-context peter
+23. kubectl get nodes
+24. kubectl get pods
+25. kubectl get deployments
+26. kubectl get pods --namespace=mynamespace
+27. kubectl get deployments --namesapce=mynamespace
+28. kubectl get rs --namespace=mynamespace
+29. kubectl create -f deployment.yml
+30. kubectl get pods --namespace=mynamespace
+31. kubectl config get-contexts
+32. kubectl config use-context fabulouzfashion.com
+33. kubectl create -f deployment.yml //here the namespace should be edited to default
+34. kubectl get pods
+35. kubectl get pods -A //To see all the pods in all the namespaces
+36. kubectl config use-context peter
+37. kubectl get pods --namespace=mynamespace
+38. kubectl get pods -A //It will not work here. Error from server (Forbidden): pods is forbidden: User "peter" cannot list resource "pods" in API group "" at the cluster scope
+39. kubectl delete pod nginx-deployment-5f847d84b8-8zbjg //forbidden: User "peter" cannot delete resource "pods" in API group "" in the namespace "mynamespace"
+ 
+
+
 
 
 
