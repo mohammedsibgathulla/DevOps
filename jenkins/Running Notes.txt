@@ -1982,6 +1982,9 @@ Node Management
 8. kubectl get pods -o wide //All the pods are scheduled on other nodes but no pod is scheduled on the drained node. Now u can do maintenance on the drained node.
 9. kubectl uncordon ip-172-20-51-30.ap-south-1.compute.internal //After maintenance u can put the node back
 
+Kubernetes In Production: High Availability
+- See the pdf file.
+
 
  
 
