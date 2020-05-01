@@ -2081,6 +2081,23 @@ Create And Deploy Helm Chart On Cluster
 24. helm rollback <release-name> <release-version>
 25. kops delete cluster --state=s3://kops-storage-b3452357 fabulouzfashion.com --yes 
 
+Upload HELM Chart In S3 Bucket
+1. kops validate cluster --state=s3://kops-storage-b3452357
+2. aws sts get-caller-identity
+3. vi s3-create-bucket.sh
+4. chmod 777 s3-create-bucket.sh
+5. ./s3-helm-repo.sh
+6. helm repo list
+7. export AWS_REGION=ap-south-1
+8. echo $AWS_REGION
+9. ls
+10. helm package hello-world
+11. helm s3 push <tar-file> <s3chart-name>
+12. helm s3 push hello-world-2.1.0.tgz anshul-charts
+13. helm search <repo-name>
+14. helm search hello-world
+15. helm install anshul-charts/hello-world
+16. kops delete cluster --state=s3://kops-storage-b3452357 fabulouzfashion.com --yes 
 
 
 
