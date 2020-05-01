@@ -2105,6 +2105,35 @@ Serverless On Kubernetes
 Kubeless Introduction
 - See the pdf file.
 
+Install Kubeless & Deploy Functions
+1. kops create cluster --yes --state=s3://kops-storage-b3452357 --zones=ap-south-1a  --node-size=t2.micro --master-size=t2.micro --authorization=RBAC --name=fabulouzfashion.com
+2. kops validate cluster --state=s3://kops-storage-b3452357
+3. kubectl api-version //To see RBAC is enabled or not.
+4. https://github.com/kubeless/kubeless //Go there and in the recent releases copy the download link
+5. wget https://github.com/kubeless/kubeless/releases/download/v1.0.6/kubeless_linux-amd64.zip
+6. unzip kubeless_linux-amd64.zip
+7. cd bundles/kubeless_linux-amd64/ 
+9. pwd -> root/kubeless/bundles/kubeless_linux-amd64/
+10. sudo mv /root/kubeless/bundles/kubeless_linux-amd64/kubeless /usr/local/bin/
+11. rm -rf bundles
+12. kubectl create ns kubeless //were are creating namespace kubeless
+13. kubectl get ns
+14. kubectl create -f https://github.com/kubeless/kubeless/releases/download/v1.0.6/kubeless-v1.0.6.yaml //the url copied from the above github repo
+15. kubectl get all -n kubeless //to show all from namespace kubeless
+16. vi hello.py
+17. chmod 777 hello.py
+18. kubeless function deploy hello --runtime python2.7 --from-file hello.py --handler test.hello
+19. kubeless function ls hello
+20. kubeless describe function hello
+21. kubeless function describe hello
+22. kubeless function call hello --data "Hello, This is Mohammed Sibgathulla"
+23. kubectl get all // we have just deployed a function internally a pod, service, deployment and replicaset are running.
+24. kubeless function ls
+25. kubectl get functions
+26. kubeless function delete hello
+27. kubectl get functions
+
+
 
 
 
