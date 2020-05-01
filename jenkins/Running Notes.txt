@@ -2133,6 +2133,9 @@ Install Kubeless & Deploy Functions
 26. kubeless function delete hello
 27. kubectl get functions
 
+Introduction To Istio
+- See the pdf file.
+
 
 
 
