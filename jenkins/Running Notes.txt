@@ -2156,6 +2156,22 @@ Install Istio On Kubernetes
 17. kubectl label namespace default istio-injection=enabled
 18. kubectl get namespace -L istio-injection
 
+Demo: Istio Enabled Application
+1. kubectl create -f node-grafana.yml
+2. kubectl get gateway -n istio-system
+3. kubectl describe gateway -n istio-system
+4. kubectl get vs -n istio-system
+5. kubectl describe vs -n istio-system
+6. kubectl create -f node-app.yml
+7. kubectl get pods
+8. kubectl describe pod pod-name
+9. kubectl create -f node-istio.yml
+10. kuebctl get gateway
+11. kubectl get vs //It shows the virtual host
+12. kubectl get svc -n istio-system //copy the load balancer url and browse to see the application
+//For the url u add the port url:15031 to see the grafana dashboard. Example: a4ffa984a70634f5db6cddf38f22cde7-2083830398.ap-south-1.elb.amazonaws.com:15031
+13. kops delete cluster --state=s3://kops-storage-b3452357 --name=fabulouzfashion.com --yes
+
 
 
 
