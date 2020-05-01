@@ -2050,6 +2050,37 @@ Installing & Running HELM On Kubernetes
 16. helm delete prodredishelm
 17. kubectl get all
 
+Create And Deploy Helm Chart On Cluster
+1. kops create cluster --yes --state=s3://kops-storage-b3452357 --zones=ap-south-1a --node-count=2 --node-size=t2.micro --master-size=t2.micro --name=fabulouzfashion.com --ssh-public-key ~/.ssh/id_rsa.pub 
+2. kops validate cluster --state=s3://kops-storage-b3452357
+1. helm create <chart-name>
+2. helm create hello-world
+3. tree hello-world/
+4. helm lint <chart-full-path>
+5. helm lint hello-world/
+6. helm template <chart-full-path>
+7. helm template hello-world/
+8. helm install --name <release-name> <chart-full-path>
+9. helm install --name nginxtest hello-world/
+10. export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=hello-world,app.kubernetes.io/instance=testnginx" -o jsonpath="{.items[0].metadata.name}")
+11. echo $POD_NAME
+12. kubectl port-forward $POD_NAME 8080:80
+13. bg
+14. curl http://127.0.0.1:8080
+15. fg
+//Change version number in chart.yml
+//Change the replicast to 2 in values.yml & instead of ClusterIp put LoadBalancer
+16. helm ls --all / helm ls
+17. helm upgrade <release-name> <chart-full-path>
+18. helm upgrade nginxtest hello-world/
+19. kubectl get --namespace default svc -w nginx-hello-world -> Copy paste the load balancer ip in the browser
+20. helm ls
+21. helm delete --purge <release-name>
+22. helm delete nginxtest
+23. kubectl get all
+24. helm rollback <release-name> <release-version>
+25. kops delete cluster --state=s3://kops-storage-b3452357 fabulouzfashion.com --yes 
+
 
 
 
