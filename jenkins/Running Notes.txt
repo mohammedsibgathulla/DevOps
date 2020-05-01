@@ -2136,6 +2136,26 @@ Install Kubeless & Deploy Functions
 Introduction To Istio
 - See the pdf file.
 
+Install Istio On Kubernetes 
+1. kops create cluster --state="s3://kops-storage-b3452357" --zones="ap-south-1a,ap-south-1b" --node-size=t2.medium --master-size=t2.micro --master-count 1 --node-count 2 --authorization=RBAC --name=fabulouzfashion.com --yes
+2. kops validate cluster --state=s3://kops-storage-b3452357
+3. Install & verify HELM with tiller to verify -> helm -h, version -> helm version 
+4. helm repo list
+5. helm repo add istio.io https://storage.googleapis.com/istio-release/releases/1.3.0/charts/
+6. helm repo list
+7. helm install --name istio-init --namespace istio-system istio.io/istio-init
+8. kubectl get crds | grep 'istio.io\|certmanager.k8s.io'
+9. kubectl get crds | grep 'istio.io\|certmanager.k8s.io' | wc -l
+10. kubectl get all -n istio-system
+11. helm install --name istio --namespace istio-system --set grafana.enabled=true istio.io/istio
+12. kubectl get all -n istio-system
+13. kubectl get svc -n istio-system
+14. kubectl get pods -n istio-system
+15. kubectl describe pods your_pod -n pod_namespace
+16. kubectl logs your_pod -n pod_namespace
+17. kubectl label namespace default istio-injection=enabled
+18. kubectl get namespace -L istio-injection
+
 
 
 
