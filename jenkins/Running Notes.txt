@@ -2178,6 +2178,9 @@ Canary Deployments With Istio
 3. From Aws Console copy the loadbalancer url and hit 10 times out of 10 times it will reflect the old and 2 times it will reflect the new site.
 4. Go to Grafana  -> Istio Services Dashboard -> Select nodejs.default.svc.cluster.local
 
+Istio Retry Policy & Uses
+- See the pdf file.
+
 
 
 
