@@ -2172,6 +2172,13 @@ Demo: Istio Enabled Application
 //For the url u add the port url:15031 to see the grafana dashboard. Example: a4ffa984a70634f5db6cddf38f22cde7-2083830398.ap-south-1.elb.amazonaws.com:15031
 13. kops delete cluster --state=s3://kops-storage-b3452357 --name=fabulouzfashion.com --yes
 
+Canary Deployments With Istio
+1. kubectl apply -f node-application.yml
+2. kubectl apply -f node-istio.yml
+3. From Aws Console copy the loadbalancer url and hit 10 times out of 10 times it will reflect the old and 2 times it will reflect the new site.
+4. Go to Grafana  -> Istio Services Dashboard -> Select nodejs.default.svc.cluster.local
+
+
 
 
 
